@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-heap::heap(int tam, int v[]){
+heap::heap(int tam, Palavra v[]){
     
     this->tam = tam;
     for(int i=0; i < this->tam; i++){
@@ -10,30 +10,30 @@ heap::heap(int tam, int v[]){
     }
    opera();
 }
-void heap::insere(int p){
+void heap::insere(Palavra p){
     this->palavras.push_back(p);
 }
 
 void heap::opera(){
-    int aux;
+    Palavra aux;
     for(int i=(this->tam/2 - 1); i>0 ; i--){
-       if(this->palavras[i] > this->palavras[2*i]){
+       if(this->palavras[i].getFrequencia() > this->palavras[2*i].getFrequencia()){
             aux=this->palavras[i];
             this->palavras[i]= this->palavras[2*i];
             this->palavras[2*i] = aux;
        }
-       if(this->palavras[i] > this->palavras[(2*i)+1]){
+       if(this->palavras[i].getFrequencia() > this->palavras[(2*i)+1].getFrequencia()){
             aux=this->palavras[i];
             this->palavras[i]= this->palavras[(2*i)+1];
             this->palavras[(2*i)+1] = aux;
        }
     }
-    if(this->palavras[0] > this->palavras[1]){
+    if(this->palavras[0].getFrequencia() > this->palavras[1].getFrequencia()){
             aux=this->palavras[0];
             this->palavras[0]= this->palavras[1];
             this->palavras[1] = aux;
     }
-    if(this->palavras[0] > this->palavras[2]){
+    if(this->palavras[0].getFrequencia() > this->palavras[2].getFrequencia()){
         aux=this->palavras[0];
         this->palavras[0]= this->palavras[2];
         this->palavras[2] = aux;
@@ -42,6 +42,16 @@ void heap::opera(){
 
 void heap::imprime(){
     for(int i=0;i<this->tam;i++){
-        cout << this->palavras[i] << " ";
+        this->palavras[i].imprime();
+    }
+}
+bool heap::addPalavra(Palavra p){
+    if(p.getFrequencia() > this->palavras[0].getFrequencia()){
+        this->palavras[0] = p;
+        opera();
+        return true;
+    }
+    else{
+        return false;
     }
 }
