@@ -20,3 +20,6 @@ void Palavra::imprime(){
 int Palavra::getFrequencia(){
     return this->frequencia;
 }
+string Palavra::getNome(){
+    return this->palavra;
+}

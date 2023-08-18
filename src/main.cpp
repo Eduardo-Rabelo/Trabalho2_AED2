@@ -1,5 +1,6 @@
 #include "heap.hpp"
 #include "Palavra.hpp"
+#include "hash.hpp"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -44,10 +45,14 @@ int main(){
     cout <<"\n\n\n";
     h.imprime();
     cout <<"\n\n\n";
+    tabelaHash a;
+    a.teste();
+    cout <<"\n\n\n";
     /*heap h(4,vp);
     cout << "\n\n";
     h.imprime();
     cout << "\n\n";
     cout << "\n\n";*/
+
 
 }

@@ -1,17 +1,18 @@
 #ifndef HASH_HPP
 #define HASH_HPP
 #include <iostream>
-#include "Palavra.hpp"
+#include "bloco.hpp"
 #include <vector>
 #define tam 10
 
 using namespace std;
-class Hash{
+class tabelaHash{
     private:
-        Palavra hashPalavras[tam];
+        bloco hashBlocos[tam];
 
     public:
-        Hash();
+        tabelaHash();
+        void teste();
     
 };
 #endif

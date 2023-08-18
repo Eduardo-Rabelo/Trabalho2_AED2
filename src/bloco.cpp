@@ -2,6 +2,12 @@
 #include <iostream>
 using namespace std;
 
+bloco::bloco(){
+    Palavra p;
+    this->palavra=p;
+    this->ant=NULL;
+    this->prox=NULL;
+}
 bloco::bloco(Palavra p){
     this->palavra=p;
     this->ant=NULL;

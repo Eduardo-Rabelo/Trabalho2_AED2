@@ -8,6 +8,7 @@ class bloco{
         Palavra palavra;
         Palavra *ant,*prox;
     public:
+        bloco();
         bloco(Palavra p);
         int getFrequencia();
         Palavra getPalavra();

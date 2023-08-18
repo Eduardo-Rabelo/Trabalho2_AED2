@@ -2,10 +2,14 @@
 #include <iostream>
 using namespace std;
 
+tabelaHash::tabelaHash(){
 
-Hash::Hash(){
-    Palavra p;
+}
+void tabelaHash::teste(){
     for(int i=0;i<tam;i++){
-        this->hashPalavras[i]=p;
+        if(this->hashBlocos[i].getPalavra().getNome()==""){
+            cout << "Nome" << i << "\n";
+        }
+        cout << "Frequencia:" << this->hashBlocos[i].getPalavra().getFrequencia() << "\n\n\n";
     }
 }

@@ -12,5 +12,6 @@ class Palavra{
         void add();
         void imprime();
         int getFrequencia();
+        string getNome();
 };
 #endif
