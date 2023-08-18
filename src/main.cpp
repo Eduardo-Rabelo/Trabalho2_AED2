@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#define k 10;
+#define k 4;
 int main(){
     
    // int x[8] = {7,6,5,4,3,2,1,9};
@@ -23,7 +23,8 @@ int main(){
             p4.add();
         }
     }
-    Palavra vp[4]={p,p2,p3,p4};
+    int y=k;
+    Palavra vp[y]={p,p2,p3,p4};
  
    for(int i=0;i<contpessoas;i++){
     vp[i].imprime();
@@ -42,6 +43,7 @@ int main(){
 
     cout <<"\n\n\n";
     h.imprime();
+    cout <<"\n\n\n";
     /*heap h(4,vp);
     cout << "\n\n";
     h.imprime();
