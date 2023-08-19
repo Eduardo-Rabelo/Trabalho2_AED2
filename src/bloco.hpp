@@ -15,6 +15,7 @@ class bloco{
         bloco *getProx();
         void setProx(bloco *b);
         void add();
+        //~bloco();
 
 };
 #endif

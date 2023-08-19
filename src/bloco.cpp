@@ -8,6 +8,10 @@ bloco::bloco(){
     this->ant=NULL;
     this->prox=NULL;
 }
+/*bloco::~bloco(){
+    delete this->prox;
+    delete this->ant;
+}*/
 bloco::bloco(Palavra p){
     this->palavra=p;
     this->ant=NULL;

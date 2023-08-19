@@ -59,13 +59,26 @@ int main(){
     lk=(int)st[0];
     cout << "a:" << lk;
     cout << "\n\n\n";
-
+    
+    Palavra palavra1("A"),palavra2("N"),palavra3("[");
 
     string str="klop";
     cout << "sizeof(p):" << str.size();
     a.inserir(o);
     a.inserir(o);
     a.inserir(o);
+    //a.inserir(palavra1);
+   // a.inserir(palavra2);
+    a.inserir(palavra1);
+    a.inserir(palavra2);
+    a.inserir(palavra1);
+    a.inserir(palavra2);
+    a.inserir(palavra2);
+    a.inserir(palavra2);
+     a.inserir(palavra1);
+     a.inserir(palavra3);
+    palavra2.imprime();
+    cout << "\n\n\n";
     cout << "\n\n\n";
     a.imprimeHash();
     cout << "\n\n\n";

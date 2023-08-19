@@ -18,9 +18,10 @@ void tabelaHash::inserir(Palavra p){
     bloco *b = new bloco(p);
     bloco * aux;
     aux = &hashBlocos[position];
-
+    
     if(hashBlocos[position].getPalavra().getNome()== ""){
         hashBlocos[position]=*b;
+        hashBlocos[position].add();
     }
     else if(hashBlocos[position].getPalavra().getNome()== p.getNome()){
         hashBlocos[position].add();
@@ -29,17 +30,29 @@ void tabelaHash::inserir(Palavra p){
         position = calculo2Hash(p.getNome());
         if(hashBlocos[position].getPalavra().getNome()== ""){
             hashBlocos[position]=*b;
+            hashBlocos[position].add();
         }
         else if(hashBlocos[position].getPalavra().getNome()== p.getNome()){
             hashBlocos[position].add();
         }
+
+
         else if(hashBlocos[position].getProx()==NULL){
+            //b->add();
+           // cout << "\n\nb->getPalavra().getNome(): " << b->getPalavra().getNome() << "\n\n";
             hashBlocos[position].setProx(b);
+            hashBlocos[position].getProx()->add();
+            //cout << "\n\nhashBlocos[position].getProx()->getPalavra().getNome(): " << hashBlocos[position].getProx()->getPalavra().getNome() << "\n\n";
         }
         else{
             while(aux->getProx()!= NULL){
                 aux = aux->getProx();
+                if(aux->getPalavra().getNome() == p.getNome()){
+                    aux->add();
+                    return;
+                }
             }
+            b->add();
             aux->setProx(b);
         }
     }
@@ -65,19 +78,22 @@ int tabelaHash::calculo2Hash(string p){
 
 void tabelaHash::imprimeHash(){
     bloco * aux;
-    
+    int cont= 0;
     for(int i=0;i<tam;i++){
-
+        cont++;
         aux = &hashBlocos[i];
         hashBlocos[i].getPalavra().imprime();
         if (hashBlocos[i].getProx()!= NULL)
         {
             while(aux->getProx()!= NULL){
-                aux->getPalavra().imprime();
+                
                 aux = aux->getProx();
+                aux->getPalavra().imprime();
+                cont++;
             }
             
         }
         
     }
+    cout << "\n\ncont: " << cont;
 }
