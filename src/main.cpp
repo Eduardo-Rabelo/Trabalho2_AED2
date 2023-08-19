@@ -53,6 +53,20 @@ int main(){
     h.imprime();
     cout << "\n\n";
     cout << "\n\n";*/
+    char x='a';
+    int lk=(int)x;
+    string st="ap";
+    lk=(int)st[0];
+    cout << "a:" << lk;
+    cout << "\n\n\n";
 
 
+    string str="klop";
+    cout << "sizeof(p):" << str.size();
+    a.inserir(o);
+    a.inserir(o);
+    a.inserir(o);
+    cout << "\n\n\n";
+    a.imprimeHash();
+    cout << "\n\n\n";
 }

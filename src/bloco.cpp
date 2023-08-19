@@ -23,3 +23,10 @@ int bloco::getFrequencia(){
 void bloco::add(){
     this->palavra.add();
 }
+
+bloco * bloco::getProx(){
+    return this->prox;
+}
+void bloco::setProx(bloco *b){
+    this->prox = b;
+}
