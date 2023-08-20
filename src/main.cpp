@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#define k 4;
+#define k 9;
 int main(){
     
    // int x[8] = {7,6,5,4,3,2,1,9};
@@ -60,7 +60,7 @@ int main(){
     cout << "a:" << lk;
     cout << "\n\n\n";
     
-    Palavra palavra1("A"),palavra2("N"),palavra3("[");
+    Palavra palavra1("A"),palavra2("N"),palavra3("["),palavra4("B");
 
     string str="klop";
     cout << "sizeof(p):" << str.size();
@@ -77,9 +77,34 @@ int main(){
     a.inserir(palavra2);
      a.inserir(palavra1);
      a.inserir(palavra3);
+      a.inserir(palavra4);
     palavra2.imprime();
     cout << "\n\n\n";
     cout << "\n\n\n";
     a.imprimeHash();
     cout << "\n\n\n";
+    
+    Palavra *vp2 = a.vetor(y);
+    cout << "\n\n\n\n\n\n\nVetor:\n\n";
+    for(int i=0; i < y; i++ ){
+        vp2[i].imprime();
+    }
+    heap he(y,vp2);
+    delete[] vp2;
+    cout << "\n\n\nHeap:\n\n";
+    he.imprime();
+    
+    cout << "\n\n\n";
+    p.imprime();
+    cout << "\n\n\n";
+    he.addPalavra(p);
+    he.imprime();
+    
+    cout << "\n\n\n";
+    he.addPalavra(p2);
+    he.imprime();
+    
+    cout << "\n\n\n";
+    //Palavra vp3[y] = vp2;
+
 }

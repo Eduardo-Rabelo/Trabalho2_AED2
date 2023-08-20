@@ -18,7 +18,7 @@ void tabelaHash::inserir(Palavra p){
     bloco *b = new bloco(p);
     bloco * aux;
     aux = &hashBlocos[position];
-    
+
     if(hashBlocos[position].getPalavra().getNome()== ""){
         hashBlocos[position]=*b;
         hashBlocos[position].add();
@@ -96,4 +96,52 @@ void tabelaHash::imprimeHash(){
         
     }
     cout << "\n\ncont: " << cont;
+}
+
+Palavra * tabelaHash::vetor(int tamanho){
+
+    Palavra * vetorPalavras = new Palavra[tamanho];
+    int cont = 0;
+    bloco *aux;
+    for (int i = 0; i < this->t; i++) {
+        if(hashBlocos[i].getPalavra().getNome()!=""){
+            aux = &hashBlocos[i];
+            vetorPalavras[cont] = hashBlocos[i].getPalavra();
+            while(aux->getProx() != NULL){
+                cont++;
+                if(cont >= tamanho){
+                    delete aux;
+                    return vetorPalavras;
+                }
+                vetorPalavras[cont] = aux->getProx()->getPalavra();
+                aux = aux->getProx();
+            }
+            cont++;
+            if(cont >= tamanho){
+                return vetorPalavras;
+            }
+        }
+    }
+    
+    
+   /* if(cont < tamanho){
+        Palavra * vetorPalavras2 = new Palavra[tamanho];
+      //  Palavra * vetorPalavras2 = new Palavra[cont];
+        for(int i=0;i<cont;i++){
+            vetorPalavras2[i]=vetorPalavras[i];
+            vetorPalavras2[i].imprime();
+        }
+       /* Palavra p("");
+        for(int i=cont; i<tamanho; i++){
+            vetorPalavras2[i]=p;
+            vetorPalavras2[i].imprime();
+        }
+        cout << "AINDA NA FUNÇÂO\n\n\n";
+        delete[] vetorPalavras;
+        return vetorPalavras2;
+    }*/
+    return vetorPalavras;
+   // delete aux;
+    
+    
 }

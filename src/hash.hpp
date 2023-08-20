@@ -9,6 +9,7 @@ using namespace std;
 class tabelaHash{
     private:
         bloco hashBlocos[tam];
+        int t = tam;
         int calculoHash(string p);
         int calculo2Hash(string p);
     public:
@@ -16,6 +17,7 @@ class tabelaHash{
         void teste();
         void inserir(Palavra p);
         void imprimeHash();
+        Palavra * vetor(int tamanho);
     
 };
 #endif
