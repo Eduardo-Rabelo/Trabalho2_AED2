@@ -157,3 +157,27 @@ Palavra *tabelaHash::vetor(int tamanho) {
 
 
 }
+
+void tabelaHash::mostraHeap() {
+    Palavra p;
+    heap hi(tamHeap, vetor(tamHeap));
+    bloco *aux;
+    int cont = 0;
+    for (int i = tamHeap;i < tam;i++) {
+        cont++;
+        aux = &hashBlocos[i];
+        hi.addPalavra(hashBlocos[i].getPalavra());
+        if (hashBlocos[i].getProx() != NULL) {
+            while (aux->getProx() != NULL) {
+
+                aux = aux->getProx();
+                hi.addPalavra(aux->getPalavra());
+                cont++;
+            }
+
+        }
+
+    }
+    hi.imprime();
+
+}

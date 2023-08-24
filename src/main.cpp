@@ -12,6 +12,35 @@ using namespace std;
 #define k 3;
 const int numberOfFiles = 2;
 
+void tiraCaracterEspecial(string *s) {
+
+    std::locale::global(std::locale(""));
+    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converter;
+
+    vector<string> portugues = { "⠝","⠴","⠙","⠼","⠑", "°","º","ª","§","⠳" };
+    vector<string> substitui = { "","","","","","","","" ,"","" };
+
+    string str = *s;
+    wstring palavra = converter.from_bytes(str);
+    for (int i = 0;i < (int)portugues.size();i++) {
+        wstring aux = converter.from_bytes(portugues[i]);
+        size_t pos = palavra.find(aux);
+        while (pos != string::npos && palavra.find(aux, pos) != string::npos) {
+            palavra.replace(pos, 1, converter.from_bytes(substitui[i]));
+            pos = palavra.find(aux, pos);
+        }
+    }
+    string new_str = converter.to_bytes(palavra);
+    cout << "\nNew_str:" << new_str << "\n";
+    //return;
+    str.assign(new_str);
+    std::cout << "STR: " << str;
+    std::cout << "\nnew_STR: " << new_str;
+    *s = str;
+    std::cout << "\n*s: " << *s;
+}
+
+
 char toLowerAccent(char c) {
     // Funciona com
     // "áâàãéèêíïóôõúüç" ÁÀÂÃÉÈÊÍÏÓÔÕÚÜÇ"
@@ -41,166 +70,11 @@ char toLowerAccent(char c) {
 }
 
 int main() {
-    //std::setlocale(LC_ALL, "pt_BR.utf8");
-    std::locale::global(std::locale("en_US.UTF-8"));
+    std::setlocale(LC_ALL, "pt_BR.utf8");
+    //std::locale::global(std::locale("en_US.UTF-8"));
     std::wcout.imbue(std::locale());
-    /*
-     // int x[8] = {7,6,5,4,3,2,1,9};
-     int contpessoas=0;
-      Palavra p("Carlos"),p2("joao"),p3("y"),p4("aaaa");
-      contpessoas=4;
 
-      for(int i=0;i<10;i++){
-          p.add();
-          if(i>0){
-              p2.add();
-          }
-          if(i>1){
-              p3.add();
-          }
-          if(i>2){
-              p4.add();
-          }
-      }
-      int y=k;
-      Palavra vp[y]={p,p2,p3,p4};
-
-     for(int i=0;i<contpessoas;i++){
-      vp[i].imprime();
-
-     }
-     cout << "\n\n";
-     heap h(contpessoas,vp);
-     h.imprime();
-      cout << "\n\n\n";
-
-      Palavra o("lsdsdasda");
-      for(int i=0;i<30;i++){
-          o.add();
-      }
-      h.addPalavra(o);
-
-      cout <<"\n\n\n";
-      h.imprime();
-      cout <<"\n\n\n";
-      tabelaHash a;
-      a.teste();
-      cout <<"\n\n\n";
-
-      char x='a';
-      int lk=(int)x;
-      string st="ap";
-      lk=(int)st[0];
-      cout << "a:" << lk;
-      cout << "\n\n\n";
-      */
-    tabelaHash a;
-    if (true) {
-        Palavra palavra1("A"), palavra2("N"), palavra3("["), palavra4("B");
-
-        //string str="klop";
-    // cout << "sizeof(p):" << str.size();
-
-        //a.inserir(palavra1);
-    // a.inserir(palavra2);
-        a.inserir(palavra1);
-        a.inserir(palavra2);
-        a.inserir(palavra1);
-        a.inserir(palavra2);
-        a.inserir(palavra2);
-        a.inserir(palavra2);
-        a.inserir(palavra1);
-        a.inserir(palavra3);
-        a.inserir(palavra4);
-    }
-
-
-
-    cout << "\n\n\n";
-    cout << "\n\n\n";
-    a.imprimeHash();
-    cout << "\n\n\n";
-    /*
-    Palavra *vp2 = a.vetor(y);
-    cout << "\n\n\n\n\n\n\nVetor:\n\n";
-    for(int i=0; i < y; i++ ){
-        vp2[i].imprime();
-    }
-    heap he(y,vp2);
-    delete[] vp2;
-    cout << "\n\n\nHeap:\n\n";
-    he.imprime();
-
-    cout << "\n\n\n";
-    p.imprime();
-    cout << "\n\n\n";
-    he.addPalavra(p);
-    he.imprime();
-
-    cout << "\n\n\n";
-    he.addPalavra(p2);
-    he.imprime();
-    Palavra poi("poi");
-    cout << "\n\n\n";
-    if(he.addPalavra(poi)){
-        cout << "\n\nAdicionou\n\n";
-    }else{
-        cout << "\n\nNão Adicionou\n\n";
-    }
-    he.imprime();
-    string str23;
-    int f;
-    cout << "\n\n\nPalavra a ser inserida: ";
-    cin >> str23;
-    cout << str23;
-    cout << "\nFrequencia:";
-    cin >> f;
-    Palavra dpa(str23);
-    for(int i=0;i<f;i++){
-        dpa.add();
-    }
-    if(he.addPalavra(dpa)){
-        cout << "\n\nAdicionou\n\n";
-    }else{
-        cout << "\n\nNão Adicionou\n\n";
-    }
-    cout << "\n\n\n";
-    he.imprime();
-    cout << "\n\n\n";
-*/
-/*
-    tabelaHash hp;
-    for (int i = 0;i < 60000;i++) {
-        string a, st = "palavra";
-        stringstream ss;
-        ss << i;
-        ss >> a;
-        st.append(a);
-        Palavra p(st);
-        hp.inserir(p);
-
-    }
-    for (int i = 0;i < 2000;i++) {
-        Palavra p2("eduardo");
-        hp.inserir(p2);
-        Palavra p3("59981");
-        hp.inserir(p3);
-        Palavra p4("59990");
-        hp.inserir(p4);
-        Palavra p5("palavra456");
-        hp.inserir(p5);
-    }
-    hp.imprimeHash();
-*/
-
-/* tabelaHash acento;
- Palavra testeA("é");
- cout << "testeA.getNome():" << testeA.getNome() << "\n";
- bloco blo(testeA);
- blo.getPalavra().getNome();
- cout << "blo.getPalavra().getNome():" << blo.getPalavra().getNome();//<<  "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
- acento.inserir(testeA);*/
- /////////////////////////////////////////NÃO APAGA COMENTARIO//////////////////////////
+    /////////////////////////////////////////NÃO APAGA COMENTARIO//////////////////////////
     tabelaHash hp;
     for (int i = 2; i < 3; i++) {
         tabelaHash hpt;
@@ -210,14 +84,17 @@ int main() {
         ss >> a;
         fileName = "dataset/input";
         fileName.append(a).append(".txt");
-        cout << "\n\nfileame:" << fileName << "\n\n";
+        std::cout << "\n\nfileame:" << fileName << "\n\n";
         ifstream file(fileName);
         if (file.is_open()) {
             string strPalavra;
             for (int i = 0; i < 27000; i++) {
                 getline(file, str);
-                //   cout << str << "\n";
-                //   cout << "(int)str.size(): " << (int)str.size();
+                //tiraCaracterEspecial(&str);
+                //std::cout << "\nMain STR: " << str << "\n\n";
+                //  std::cout << "\n\n";
+                  //   cout << str << "\n";
+                  //   cout << "(int)str.size(): " << (int)str.size();
                 if (str[(int)str.size() - 1] == '\n') {
                     // cout << "\\n \n\n\n";
                 }
@@ -269,11 +146,12 @@ int main() {
             }
             file.close();
         } else {
-            cout << "\n\nFile não encontrado\n\n\n";
+            std::cout << "\n\nFile não encontrado\n\n\n";
         }
         hpt.imprimeHash();
-
-
+        cout << "\n\nHEAP:\n\n";
+        hpt.mostraHeap();
+        std::cout << "\n\n\n";
         break;
     }
 
