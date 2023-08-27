@@ -16,7 +16,7 @@
 
 # Modo como palavras são armazenadas na hash
 <p align="justify">
-	As palavras são armazenadas na hash em lowercase e com os acentos, porem certas palavras, precedias, ou sucedidas por caracteres especiais, permanecem com esses caracteres ao serem armazenados na hash. Alguns desses casos são os caracteres "”" e "—", que são representados nas palavras da hash como "⠝" e "⠴". Como essas palavras são contadas como distintas das mesmas palavras sem os caracteres especiais, há uma subcontagem das "<i>top words".
+	As palavras são armazenadas na hash em lowercase e com os acentos, porem certas palavras, precedias, ou sucedidas por caracteres especiais, permanecem com esses caracteres ao serem armazenados na hash. Alguns desses casos são os caracteres "”" e "—", que são representados nas palavras da hash como "⠝" e "⠴". Como essas palavras são contadas como distintas das mesmas palavras sem os caracteres especiais, pode haver uma subcontagem das "<i>top words". Na figura a seguir esse fato é mostrado com um exemplo feito com um arquivo de teste, que continha a palavra " ministros” "
 </p>
 
 
