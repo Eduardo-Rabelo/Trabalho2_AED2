@@ -22,18 +22,19 @@
 
 ![ProfundoPe](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img1.png)
 
-
 <p align="justify">
-	Na imagem acima, é mostrado como a busca em profundidade ocorre, primeiro, o personagem tenta as duas primeiras direções na ordem de prioridade, porém há paredes bloqueando seu caminho, de modo que ele vai para a direita. Ao parar na borda da matriz, ele vai direto para a quarta direção prioritária. Caso as demais direções além das três de maior prioridade estivessem bloqueadas, ele voltaria na mais prioritaria, depois na segunda e na terceira até uma ser possível. E, caso não seja, a posição é desempilhada e o personagem volta para a casa que estava anteriormente, mesmo ela sendo já marcada.
+	Na hash, os índices das posições em que as palavras serão armazenadas são calculados com base em soma mod tamanho da tabela, que é a variável global definida no arquivo "hash.hpp" como "tam". Soma seria a soma dos números inteiros que representam os caracteres ASCII da palavra. Caso já haja uma palavra armanzenada no índice, outro índice é calculado da mesma forma, porém a soma é mudada de modo que ela passa a ser a soma dos caracteres multiplicados pelas suas posições na própria palavra. O caractere vda posição 0, por exemplo, sempre terá valor 0. Os caracteres especiais são substituidos por caracteres ASCII para se fazer esse cálculo.
 </p>
 
-![LarguraPe](https://github.com/Eduardo-Rabelo/Trabalho3_AED__2023_Final/blob/main/ImagensTrabalho3_AED/LargoPe.png)
+# Toy Example
+
+![LarguraPe](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img2.png)
 
 <p align="justify">
-	A última imagem, por sua vez, mostra como a busca em largura funciona. Como o personagem toma todas as direções possíveia a partir de onde ele está, ele tende a encontrar muito mais perigos e percorrer mais casas, sobretudo quando a condição de fim se encontra próxima ao final da matriz, como é demonstrado na imagem a seguir.
+	A imagem a seguir mostra qual seria a saída do arquivo de exemplo mostrado na imagem anterior.
 </p>
 
-![LarguraG](https://github.com/Eduardo-Rabelo/Trabalho3_AED__2023_Final/blob/main/ImagensTrabalho3_AED/LarguraG.png)
+![LarguraG](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img3.png)
 
 <p align="justify">
 	Para a mesma matriz, o DFS segue somente uma direção, ou seja, o personagem anda muito menos casas que no método BFS. Porém, caso a interrogação estivesse logo abaixo da casa inicial,o custo de percorrer a matriz seria teta de 1.
