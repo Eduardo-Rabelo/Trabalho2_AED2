@@ -61,7 +61,7 @@ O output desse código é, para cada arquivo, o nome do arquivo analisado segido
 
 # Observações
 <p align="justify">
-Além do problema das palavras com caracteres especiais, a Hash suporta apenas cerca de 25600 palavras. Não foi possível ler as últimas 400 linhas do texto Semana_Machado_Assis por esta razão. O arquivo "input1.txt" não contem essas linhas.
+Além do problema das palavras com caracteres especiais, a Hash suporta apenas cerca de 25600 palavras. Não foi possível ler as últimas 400 linhas do texto Semana_Machado_Assis por esta razão. O arquivo "input1.txt" não contem essas linhas. Estes pontos devem ser corrigidos em trabalhos futuros.
 </p>
 
 # Compilação e Execução
