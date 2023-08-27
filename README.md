@@ -3,7 +3,7 @@
 		O algoritmo aqui apresentado tem como objetivo guardar todas as palavras de arquivos de entrada "inputX.txt", sendo X o número do input, em uma tabela hash e depois fazer o uso de um heap mínimo para descobrir as k palavras que mais aparecem nos textos dos inputs.
 </p>
 <p align="justify">
-	 O heap deve ser usado de modo que ele primeiro é carregado com um vetor que armazena k palavras e faz uma operação de heap no vetor pra fazer com que o valor mínimo fique na posição 0. A cada inserção no heap, a operação pra achar o valor mínimo é realizada novamete. Essa operação é feita com base na frequencia em que as palavras aparecem no texto. 
+	 O heap deve ser usado de modo que ele primeiro é carregado com um vetor que armazena k palavras e faz uma operação de heap no vetor pra fazer com que o valor mínimo fique na posição 0. A cada inserção no heap, após ele ser carregado a primeira vez, a operação pra achar o valor mínimo é realizada novamete. Essa operação é feita com base na frequencia em que as palavras aparecem no texto. 
 </p>
 <p align="justify">
 	Na classe tabelaHash, há um método que faz com que cada palavra da hash seja comparada com o mínimo do heap por meio da função do heap addPalavra(Palavra p), que coloca a palavra p na posição zero do heap caso ela seja maior que o mínimo e faz a operação de heap novamente.
