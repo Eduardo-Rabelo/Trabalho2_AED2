@@ -35,51 +35,29 @@
 ![LarguraPe](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img2.png)
 
 <p align="justify">
-	A imagem a seguir mostra qual seria a saída do arquivo de exemplo mostrado na imagem anterior.
+	A imagem a seguir mostra qual seria a saída do arquivo de exemplo mostrado na imagem anterior, para k=10. É possível notar que as palavras com caracteres especiais também contam pro calculo do heap.
 </p>
 
 ![LarguraG](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img3.png)
 
-<p align="justify">
-	Para a mesma matriz, o DFS segue somente uma direção, ou seja, o personagem anda muito menos casas que no método BFS. Porém, caso a interrogação estivesse logo abaixo da casa inicial,o custo de percorrer a matriz seria teta de 1.
-</p>
-
-![LProfundoG](https://github.com/Eduardo-Rabelo/Trabalho3_AED__2023_Final/blob/main/ImagensTrabalho3_AED/ProfundoG.png)
-
-
-
 # Custo
 <p align="justify">
-	O custo do algoritmo, em questão de memória alocada, depende da ordem das matrizes. Para percorrer a matriz, o custo pertence à classe Teta de n, sendo n o numero de elementos da matriz. No mínimo o custo seria 2n para criar os vectors que representa a matriz e a matriz verdade,porém,dependendo do número de perigos e do método usado, o custo aumenta, podendo chegar no pior caso, que seria uma matriz composta somente por perigos, a Teta de n!.
-
-</p>
-<p align="justify">
-	O custo de cada método depende mais de onde os perigos estão posicionados do que de quantas casas são percorridas. Porém, quanto mais casas são percorridas, maior é a chance de se encontrar prigos e, por essa razão, no geral, caso o símbolo de parada esteja próximo ao fim da matriz,o BFS tende a ser pior que o DFS, pois , no BFS, são percorridas muito mais casas e há grandes chances de se encontrar mais perigos.
+	O custo do algoritmo, em questão de memória alocada, é da ordem de Teta de n, sendo n o número de palavras do texto. Em questão de iterações, as palavras, após serem armazenadas na hash, são conferidas uma a uma para ver se entram no heap, o que também tem custo Teta de n. Essas operações se repetem pra cada arquivo, ou seja, o custo total do código em tempo é da classe de Teta de n*m, sendo m o número de arquivos de input.
 </p>
 
 # Conclusão
 <p align="justify">
-	Em suma, comparados ao método aleatório, os métodos BFS e DFS são muito mais previsíveis e, portanto, mais indicados, porém, há casos em que eles se tornão tão ruins, ou piores que o aleatório, de modo que, se houver alguma informação a respeito do local provável de se encontrar a condição de finalização, é possível escolher o método que provavelmente busca melhor na matriz.
+	Em suma, o algorítimo consiste em, para cada arquivo de input, criar uma hash com todas as palavras do arquivo e calcular as k "<i>top words" por meio de um heap mínimo baseado na frequencia das palavras no texto. O custo do algorítimo é linear em relação ao total de palavras de todos os arquivos e há um problema de conversão de caracteres especiais que deverá ser corrigido na próxima versão do trabalho.
 </p>
 
 
 
 # Output
 <p align="justify">
-No arquivo "output.data",  são mostradas a matriz percorrida e a matriz verdade de cada um dos três métodos, aleatório, DFS e BFS respectivamente. Na figura a seguir, é mostrado o output do DFS.
+O output desse código é o heap de cada arquivo em ordem, como pode-se ver na imagem seguinte.
 </p>
 
-![Output](https://github.com/Eduardo-Rabelo/Trabalho3_AED__2023_Final/blob/main/ImagensTrabalho3_AED/Output.png)
-
-<p align="justify">
-Já na própria tela, são printadas a matriz a ser percorrida, a matriz percorrida, o número de casas percorridas ao menos uma vez na matriz, o número de perigos enfrentados, a pontuação e o tempo de execução do método. A seguir, mostra-se o output do DFS.
-</p>
-
-![cout](https://github.com/Eduardo-Rabelo/Trabalho3_AED__2023_Final/blob/main/ImagensTrabalho3_AED/cout.png)
-
-<p align="justify">
-A única excessão é o método aleatório, que é mostrado como era no trabalho anterior, além da matriz percorrida, também são mostrados todos os caminhos percorridos até o final da matriz.
-</p>
+![Output](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img4.png)
 
 # Compilação e Execução
 
