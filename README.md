@@ -26,6 +26,10 @@
 	Na hash, os índices das posições em que as palavras serão armazenadas são calculados com base em soma mod tamanho da tabela, que é a variável global definida no arquivo "hash.hpp" como "tam". Soma seria a soma dos números inteiros que representam os caracteres ASCII da palavra. Caso já haja uma palavra armanzenada no índice, outro índice é calculado da mesma forma, porém a soma é mudada de modo que ela passa a ser a soma dos caracteres multiplicados pelas suas posições na própria palavra. O caractere vda posição 0, por exemplo, sempre terá valor 0. Os caracteres especiais são substituidos por caracteres ASCII para se fazer esse cálculo.
 </p>
 
+<p align="justify">
+	Caso, mesmo calculando duas vezes o índice, haja colisão, a palavra é armazenada em uma lista na posição da hash indicada pelo segundo índice.
+</p>
+
 # Toy Example
 
 ![LarguraPe](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img2.png)
