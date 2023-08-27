@@ -14,6 +14,12 @@
 	Para se carregar a tabela hash com as palavras dos inputs e mostrar as palavras mais frequentes de cada input, é utilizado um for que leva em conta a constante inteira "numberOfFiles" pra ler todos os inputs, aramazenar suas palavras na hash e mostrar as k palavras mais frequentes. O k, que é o tamanho do heap, no código é a variável global definida no arquivo "hash.hpp" como "tamHeap".
 </p>
 
+# Modo como palavras são armazenadas na hash
+<p align="justify">
+	As palavras são armazenadas na hash em lowercase e com os acentos, porem certas palavras, precedias, ou sucedidas por caracteres especiais, permanecem com esses caracteres ao serem armazenados na hash. Alguns desses casos são os caracteres "”" e "—", que são representados nas palavras da hash como "⠝" e "⠴". Como essas palavras são contadas como distintas das mesmas palavras sem os caracteres especiais, há uma subcontagem das "<b>{top words<\b>".
+</p>
+
+
 ![ProfundoPe](https://github.com/Eduardo-Rabelo/Trabalho3_AED__2023_Final/blob/main/ImagensTrabalho3_AED/ProfundoPe.png)
 
 		
