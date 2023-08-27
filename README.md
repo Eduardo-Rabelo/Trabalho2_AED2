@@ -54,10 +54,15 @@
 
 # Output
 <p align="justify">
-O output desse código é o heap de cada arquivo em ordem, como pode-se ver na imagem seguinte.
+O output desse código é, para cada arquivo, o nome do arquivo analisado segido do número de palavras na hash e o heap do arquivo, como pode-se ver na imagem seguinte.
 </p>
 
 ![Output](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img4.png)
+
+# Observações
+<p align="justify">
+Além do problema das palavras com caracteres especiais, a Hash suporta apenas cerca de 25600 palavras. Não foi possível ler as últimas 400 linhas do texto Semana_Machado_Assis por esta razão. O arquivo "input1.txt" não contem essas linhas.
+</p>
 
 # Compilação e Execução
 

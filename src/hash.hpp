@@ -11,10 +11,9 @@
 using namespace std;
 class tabelaHash {
 private:
-    //int tam_heap = tamHeap;
+    int cont = 0;
     bloco hashBlocos[tam];
     int t = tam;
-    //heap h(tamHeap,);
     int calculoHash(string p);
     int calculo2Hash(string p);
     vector<string> portugues = { "á","ã","â","à","ã","é","è","ê","í","ï", "ì","ó","ô","õ","ù","ú","û","ü","ç","ò","⠝","⠴","⠙","⠼","⠑", "°","º","ª","§","⠳" };
@@ -23,12 +22,12 @@ private:
 
 public:
     tabelaHash();
-    void teste();
     void inserir(Palavra p);
     void imprimeHash();
     void mostrarHeap();
     Palavra *vetor(int tamanho);
     void mostraHeap();
+    void imprimeCont();
 
 };
 #endif

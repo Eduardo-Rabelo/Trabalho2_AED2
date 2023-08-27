@@ -5,20 +5,12 @@ tabelaHash::tabelaHash() {
     std::locale::global(std::locale(""));
 
 }
-void tabelaHash::teste() {
-    for (int i = 0;i < tam;i++) {
-        if (this->hashBlocos[i].getPalavra().getNome() == "") {
-            cout << "Nome" << i << "\n";
-        }
-        cout << "Frequencia:" << this->hashBlocos[i].getPalavra().getFrequencia() << "\n\n\n";
-    }
-}
+
 void tabelaHash::inserir(Palavra p) {
 
     std::locale::global(std::locale(""));
     string str = p.getNome();
     wstring palavra = this->converter.from_bytes(str);
-    wcout << "Palavra: " << palavra;
     for (int i = 0;i < (int)this->portugues.size();i++) {
         wstring aux = this->converter.from_bytes(portugues[i]);
         size_t pos = palavra.find(aux);
@@ -27,13 +19,8 @@ void tabelaHash::inserir(Palavra p) {
             pos = palavra.find(aux, pos);
         }
     }
-    wcout << "\nPalavra: " << palavra;
     string new_str = this->converter.to_bytes(palavra);
-    //cout << "\nNew_str:" << new_str << "\n";
-    //return;
-    cout << "\nNew_str:" << new_str << "\n";
     str.assign(new_str);
-    std::cout << "STR: " << str;
     int position = calculoHash(str);
     bloco *b = new bloco(p);
     bloco *aux;
@@ -42,6 +29,7 @@ void tabelaHash::inserir(Palavra p) {
     if (hashBlocos[position].getPalavra().getNome() == "") {
         hashBlocos[position] = *b;
         hashBlocos[position].add();
+        this->cont++;
     } else if (hashBlocos[position].getPalavra().getNome() == p.getNome()) {
         hashBlocos[position].add();
     } else {
@@ -49,17 +37,17 @@ void tabelaHash::inserir(Palavra p) {
         if (hashBlocos[position].getPalavra().getNome() == "") {
             hashBlocos[position] = *b;
             hashBlocos[position].add();
+            this->cont++;
         } else if (hashBlocos[position].getPalavra().getNome() == p.getNome()) {
             hashBlocos[position].add();
         }
 
 
         else if (hashBlocos[position].getProx() == NULL) {
-            //b->add();
-           // cout << "\n\nb->getPalavra().getNome(): " << b->getPalavra().getNome() << "\n\n";
             hashBlocos[position].setProx(b);
             hashBlocos[position].getProx()->add();
-            //cout << "\n\nhashBlocos[position].getProx()->getPalavra().getNome(): " << hashBlocos[position].getProx()->getPalavra().getNome() << "\n\n";
+            this->cont++;
+
         } else {
             while (aux->getProx() != NULL) {
                 aux = aux->getProx();
@@ -70,6 +58,7 @@ void tabelaHash::inserir(Palavra p) {
             }
             b->add();
             aux->setProx(b);
+            this->cont++;
         }
     }
 
@@ -137,28 +126,7 @@ Palavra *tabelaHash::vetor(int tamanho) {
             }
         }
     }
-
-
-    /* if(cont < tamanho){
-         Palavra * vetorPalavras2 = new Palavra[tamanho];
-       //  Palavra * vetorPalavras2 = new Palavra[cont];
-         for(int i=0;i<cont;i++){
-             vetorPalavras2[i]=vetorPalavras[i];
-             vetorPalavras2[i].imprime();
-         }
-        Palavra p("");
-         for(int i=cont; i<tamanho; i++){
-             vetorPalavras2[i]=p;
-             vetorPalavras2[i].imprime();
-         }
-         cout << "AINDA NA FUNÇÂO\n\n\n";
-         delete[] vetorPalavras;
-         return vetorPalavras2;
-     }*/
     return vetorPalavras;
-    // delete aux;
-
-
 }
 
 void tabelaHash::mostraHeap() {
@@ -183,4 +151,8 @@ void tabelaHash::mostraHeap() {
     }
     hi.imprime();
 
+}
+
+void tabelaHash::imprimeCont() {
+    cout << "Palavras na hash: " << this->cont;
 }
