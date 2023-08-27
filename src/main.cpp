@@ -7,39 +7,43 @@
 #include <vector>
 #include <sstream>
 #include<locale>
+#include <codecvt>
 
 using namespace std;
-#define k 3;
 const int numberOfFiles = 2;
 
+/*
 void tiraCaracterEspecial(string *s) {
 
     std::locale::global(std::locale(""));
     wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converter;
 
     vector<string> portugues = { "⠝","⠴","⠙","⠼","⠑", "°","º","ª","§","⠳" };
-    vector<string> substitui = { "","","","","","","","" ,"","" };
+    vector<string> substitui = { "","","","","","","","","","" };
 
     string str = *s;
     wstring palavra = converter.from_bytes(str);
+    //wcout << "Palavra: " << palavra;
     for (int i = 0;i < (int)portugues.size();i++) {
         wstring aux = converter.from_bytes(portugues[i]);
         size_t pos = palavra.find(aux);
         while (pos != string::npos && palavra.find(aux, pos) != string::npos) {
+            //  cout << "\nENCONTREI\n";
             palavra.replace(pos, 1, converter.from_bytes(substitui[i]));
             pos = palavra.find(aux, pos);
         }
     }
+    wcout << "\nPalavra: " << palavra;
     string new_str = converter.to_bytes(palavra);
     cout << "\nNew_str:" << new_str << "\n";
     //return;
     str.assign(new_str);
-    std::cout << "STR: " << str;
-    std::cout << "\nnew_STR: " << new_str;
+    //std::cout << "STR: " << str;
+    //std::cout << "\nnew_STR: " << new_str;
     *s = str;
-    std::cout << "\n*s: " << *s;
+    //std::cout << "\n*s: " << *s;
 }
-
+*/
 
 char toLowerAccent(char c) {
     // Funciona com
@@ -76,7 +80,7 @@ int main() {
 
     /////////////////////////////////////////NÃO APAGA COMENTARIO//////////////////////////
     tabelaHash hp;
-    for (int i = 2; i < 3; i++) {
+    for (int i = 1; i < 2; i++) {
         tabelaHash hpt;
         string fileName, a, str;
         stringstream ss;
@@ -88,13 +92,13 @@ int main() {
         ifstream file(fileName);
         if (file.is_open()) {
             string strPalavra;
-            for (int i = 0; i < 27000; i++) {
+            for (int i = 0; i < 5; i++) {
                 getline(file, str);
                 //tiraCaracterEspecial(&str);
-                //std::cout << "\nMain STR: " << str << "\n\n";
-                //  std::cout << "\n\n";
-                  //   cout << str << "\n";
-                  //   cout << "(int)str.size(): " << (int)str.size();
+                std::cout << "\nMain STR: " << str << "\n\n";
+                std::cout << "\n\n";
+                //   cout << str << "\n";
+                //   cout << "(int)str.size(): " << (int)str.size();
                 if (str[(int)str.size() - 1] == '\n') {
                     // cout << "\\n \n\n\n";
                 }

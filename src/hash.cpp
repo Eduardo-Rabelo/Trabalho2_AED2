@@ -18,6 +18,7 @@ void tabelaHash::inserir(Palavra p) {
     std::locale::global(std::locale(""));
     string str = p.getNome();
     wstring palavra = this->converter.from_bytes(str);
+    wcout << "Palavra: " << palavra;
     for (int i = 0;i < (int)this->portugues.size();i++) {
         wstring aux = this->converter.from_bytes(portugues[i]);
         size_t pos = palavra.find(aux);
@@ -26,11 +27,13 @@ void tabelaHash::inserir(Palavra p) {
             pos = palavra.find(aux, pos);
         }
     }
+    wcout << "\nPalavra: " << palavra;
     string new_str = this->converter.to_bytes(palavra);
     //cout << "\nNew_str:" << new_str << "\n";
     //return;
+    cout << "\nNew_str:" << new_str << "\n";
     str.assign(new_str);
-
+    std::cout << "STR: " << str;
     int position = calculoHash(str);
     bloco *b = new bloco(p);
     bloco *aux;
