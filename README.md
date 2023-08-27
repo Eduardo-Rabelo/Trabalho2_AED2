@@ -3,10 +3,10 @@
 		O algoritmo aqui apresentado tem como objetivo guardar todas as palavras de arquivos de entrada "inputX.txt", sendo X o número do input, em uma tabela hash e depois fazer o uso de um heap mínimo para descobrir as k palavras que mais aparecem nos textos dos inputs.
 </p>
 <p align="justify">
-	 O heap deve ser usado de modo que ele primeiro é carregado com um vetor que armazena k palavras e faz uma operação de heap no vetor pra fazer com que o valor mínimo fique na posição 0. A cada inserção no heap, a operaçãopra achar o valor mínimo é realizada novamete. Essa operação é feita com base na frequencia em que as palavras aparecem no texto. Na classe tabelaHash, há um método que faz com que cada palavra da hash seja comparada com o mínimo do heap por meio da função do heap addPalavra(Palavra p), que coloca a palavra p na posição zero do heap caso ela seja maior que o mínimo e faz a operação de heap novamente.
+	 O heap deve ser usado de modo que ele primeiro é carregado com um vetor que armazena k palavras e faz uma operação de heap no vetor pra fazer com que o valor mínimo fique na posição 0. A cada inserção no heap, a operação pra achar o valor mínimo é realizada novamete. Essa operação é feita com base na frequencia em que as palavras aparecem no texto. 
 </p>
 <p align="justify">
-	Já na busca em largura, a matriz é percorrida de modo que todas as possibilidades válidas de caminho são tomadas ao mesmo tempo. De modo que a partir da posição em que o personagem está, ele acessa todas as casas ao redor. Da posição (0,0) da matriz, por exemplo, as posições (1,0), (0,1) e (1,1) são acessadas, caso não haja uma parede impedindo a passagem do personagem. Para se implementar esse método foi utilizada uma fila, estrutura de dados do tipo "First in, First out", o que faz com que após prcorrer todas as posições possíveis da casa inicial, por exemplo, o personagem volte para a posição (1,1), que é a primeira casa acessada após a inicial. A ordem de prioridade deste método é a mesma do DFS.
+	Na classe tabelaHash, há um método que faz com que cada palavra da hash seja comparada com o mínimo do heap por meio da função do heap addPalavra(Palavra p), que coloca a palavra p na posição zero do heap caso ela seja maior que o mínimo e faz a operação de heap novamente.
 </p>
 
 <p align="justify">
