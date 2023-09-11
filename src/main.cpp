@@ -82,7 +82,7 @@ int main() {
         stringstream ss;
         ss << i;
         ss >> a;
-        fileName = "dataset/input";
+        fileName = "dataset/filosofia";
         fileName.append(a).append(".txt");
         std::cout << "\n\nfileame:" << fileName << "\n\n";
         ifstream file(fileName);
