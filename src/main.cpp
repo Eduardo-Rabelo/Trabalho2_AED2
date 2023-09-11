@@ -12,6 +12,39 @@
 using namespace std;
 const int numberOfFiles = 2;
 
+/*
+void tiraCaracterEspecial(string *s) {
+
+    std::locale::global(std::locale(""));
+    wstring_convert<codecvt_utf8<wchar_t>, wchar_t> converter;
+
+    vector<string> portugues = { "⠝","⠴","⠙","⠼","⠑", "°","º","ª","§","⠳" };
+    vector<string> substitui = { "","","","","","","","","","" };
+
+    string str = *s;
+    wstring palavra = converter.from_bytes(str);
+    //wcout << "Palavra: " << palavra;
+    for (int i = 0;i < (int)portugues.size();i++) {
+        wstring aux = converter.from_bytes(portugues[i]);
+        size_t pos = palavra.find(aux);
+        while (pos != string::npos && palavra.find(aux, pos) != string::npos) {
+            //  cout << "\nENCONTREI\n";
+            palavra.replace(pos, 1, converter.from_bytes(substitui[i]));
+            pos = palavra.find(aux, pos);
+        }
+    }
+    wcout << "\nPalavra: " << palavra;
+    string new_str = converter.to_bytes(palavra);
+    cout << "\nNew_str:" << new_str << "\n";
+    //return;
+    str.assign(new_str);
+    //std::cout << "STR: " << str;
+    //std::cout << "\nnew_STR: " << new_str;
+    *s = str;
+    //std::cout << "\n*s: " << *s;
+}
+*/
+
 char toLowerAccent(char c) {
 
     int aux = c;
