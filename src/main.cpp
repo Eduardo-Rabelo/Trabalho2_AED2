@@ -1,5 +1,7 @@
 #include "heap.hpp"
 #include "Palavra.hpp"
+#include "record.hpp"
+#include "Tree.hpp"
 #include "hash.hpp"
 #include "bloco.hpp"
 #include <iostream>
@@ -75,63 +77,87 @@ int main() {
     std::setlocale(LC_ALL, "pt_BR.utf8");
     std::wcout.imbue(std::locale());
 
-    tabelaHash hp;
-    for (int i = 1; i <= numberOfFiles; i++) {
-        tabelaHash hpt;
-        string fileName, a, str;
-        stringstream ss;
-        ss << i;
-        ss >> a;
-        fileName = "dataset/filosofia";
-        fileName.append(a).append(".txt");
-        std::cout << "\n\nfileame:" << fileName << "\n\n";
-        ifstream file(fileName);
-        if (file.is_open()) {
-            string strPalavra;
-            while (getline(file, str)) {
-                if (str.size() > 0) {
-                    for (int j = 0;j < (int)str.size();j++) {
-                        if (str[j] != '/' && str[j] != '.' && str[j] != ',' && str[j] != '!' && str[j] != '?' && str[j] != ' ' && str[j] != '\n' && str[j] != ';' && str[j] != ':' && str[j] != '-' && str[j] != '"' && str[j] != '\t' && str[j] != '\\' && str[j] != '(' && str[j] != ')' && str[j] != '[' && str[j] != ']' && str[j] != '{' && str[j] != '}' && str[j] != '=' && str[j] != '+' && str[j] != '"') {
-                            str[j] = toLowerAccent(str[j]);
-                            strPalavra.push_back(str[j]);
-                        } else if (str[j] == '-') {
-                            if (str[j + 1] == '-' || (j != 0 && str[j - 1] == '-')) {
+
+    record r(1), r2(2), r3(3), r4(4), r5(5);
+    Tree t;
+
+    r.imprime();
+    blocoR br(r);
+    blocoR br2(r2), br3(r3), br4(r4), br5(r5);
+    br.getRecord().imprime();
+    t.meuInserir(br3);
+    cout << "\n\nInseriu\n\n";
+    br3.setRecord(r2);
+    t.meuInserir(br3);
+    cout << "\n\nInseriu2\n\n";
+    t.meuInserir(br4);
+    cout << "\n\nInseriu3\n\n";
+    t.meuInserir(br5);
+    cout << "\n\nInseriu4\n\n";
+    t.central();
+    cout << "\n\n\ntchau\n\n\n";
+    /*
+        tabelaHash hp;
+        for (int i = 1; i <= numberOfFiles; i++) {
+            tabelaHash hpt;
+            string fileName, a, str;
+            stringstream ss;
+            ss << i;
+            ss >> a;
+            fileName = "dataset/filosofia";
+            if (i != 1) {
+                fileName.append(a).append(".txt");
+            } else {
+                fileName.append(".txt");
+            }
+            std::cout << "\n\nfileame:" << fileName << "\n\n";
+            ifstream file(fileName);
+            if (file.is_open()) {
+                string strPalavra;
+                while (getline(file, str)) {
+                    if (str.size() > 0) {
+                        for (int j = 0;j < (int)str.size();j++) {
+                            if (str[j] != '/' && str[j] != '.' && str[j] != ',' && str[j] != '!' && str[j] != '?' && str[j] != ' ' && str[j] != '\n' && str[j] != ';' && str[j] != ':' && str[j] != '-' && str[j] != '"' && str[j] != '\t' && str[j] != '\\' && str[j] != '(' && str[j] != ')' && str[j] != '[' && str[j] != ']' && str[j] != '{' && str[j] != '}' && str[j] != '=' && str[j] != '+' && str[j] != '"') {
+                                str[j] = toLowerAccent(str[j]);
+                                strPalavra.push_back(str[j]);
+                            } else if (str[j] == '-') {
+                                if (str[j + 1] == '-' || (j != 0 && str[j - 1] == '-')) {
+                                    if (strPalavra != "") {
+                                        Palavra p(strPalavra);
+                                        hpt.inserir(p);
+                                        strPalavra = "";
+                                    }
+
+                                } else {
+                                    str[j] = toLowerAccent(str[j]);
+                                    strPalavra.push_back(str[j]);
+                                }
+                            } else {
                                 if (strPalavra != "") {
                                     Palavra p(strPalavra);
                                     hpt.inserir(p);
                                     strPalavra = "";
                                 }
-
-                            } else {
-                                str[j] = toLowerAccent(str[j]);
-                                strPalavra.push_back(str[j]);
-                            }
-                        } else {
-                            if (strPalavra != "") {
-                                Palavra p(strPalavra);
-                                hpt.inserir(p);
-                                strPalavra = "";
                             }
                         }
-                    }
-                    if (strPalavra != "") {
-                        Palavra p(strPalavra);
-                        hpt.inserir(p);
-                        strPalavra = "";
+                        if (strPalavra != "") {
+                            Palavra p(strPalavra);
+                            hpt.inserir(p);
+                            strPalavra = "";
+                        }
+
                     }
 
                 }
-
+                file.close();
+            } else {
+                std::cout << "\n\nFile não encontrado\n\n\n";
             }
-            file.close();
-        } else {
-            std::cout << "\n\nFile não encontrado\n\n\n";
-        }
-        hpt.imprimeCont();
-        std::cout << "\n\nHEAP:\n\n";
-        hpt.mostraHeap();
-        std::cout << "\n\n\n";
+            hpt.imprimeCont();
+            std::cout << "\n\nHEAP:\n\n";
+            hpt.mostraHeap();
+            std::cout << "\n\n\n";
 
-    }
+        }*/
     return 0;
 }
