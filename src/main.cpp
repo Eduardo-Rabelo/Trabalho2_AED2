@@ -92,9 +92,25 @@ int main() {
     cout << "\n\nInseriu2\n\n";
     t.meuInserir(br4);
     cout << "\n\nInseriu3\n\n";
+    r.setKey(10);
+    br5.setRecord(r);
     t.meuInserir(br5);
     cout << "\n\nInseriu4\n\n";
+    r.setKey(11);
+    br5.setRecord(r);
+    t.meuInserir(br5);
+    cout << "\n\nInseriu5\n\n";
+    r.setKey(6);
+    br5.setRecord(r);
+    t.meuInserir(br5);
+    cout << "\n\nInseriu6\n\n";
+
+    cout << "\n\nCentral: \n\n";
     t.central();
+    cout << "\n\nPreOrdem: \n\n";
+    t.preOrdem();
+    cout << "\n\nPosOrdem: \n\n";
+    t.posOrdem();
     cout << "\n\n\ntchau\n\n\n";
     /*
         tabelaHash hp;

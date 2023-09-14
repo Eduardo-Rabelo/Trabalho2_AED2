@@ -12,6 +12,8 @@ private:
 	blocoR *morto;
 	//blocoR *dir, *esq;
 	void centralRecursivo(blocoR *br);
+	void preOrdemRecursivo(blocoR *br);
+	void posOrdemRecursivo(blocoR *br);
 
 public:
 	Tree();
@@ -19,6 +21,8 @@ public:
 
 	void inserir(record r);
 	void central();
+	void preOrdem();
+	void posOrdem();
 	void teste(record r);
 	void meuInserir(blocoR r);
 	/*void insertTree_alt(Tree **t, Record r);

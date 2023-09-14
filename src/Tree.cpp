@@ -112,17 +112,8 @@ void Tree::meuInserir(blocoR r) {
 }
 
 void Tree::central() {
-	/*blocoR *br;
-	br = this->raiz;*/
 	if (this->raiz != NULL) {
-		raiz->getRecord().imprime();
-		raiz->verFilhos();
-		if (this->morto == NULL) {
-			cout << "MORTO E NULL";
-		}
-		//	raiz->getDir()->getRecord().imprime();
 		if (raiz != NULL) {
-			cout << "\n\nRecursão\n\n\n\n\n\n\n\n";
 			centralRecursivo(this->raiz);
 		} else {
 			cout << "Arvore vazia";
@@ -134,15 +125,53 @@ void Tree::central() {
 
 void Tree::centralRecursivo(blocoR *br) {
 	if (br != NULL) {
-		/*br->getRecord().imprime();
-		br->verFilhos();*/
-
-		cout << "\noi\n";
 		centralRecursivo(br->getEsq());
-		cout << "\n\n";
 		br->getRecord().imprime();
-		cout << "\n\n";
 		centralRecursivo(br->getDir());
+	}
+	return;
+}
+
+
+void Tree::preOrdem() {
+	if (this->raiz != NULL) {
+		if (raiz != NULL) {
+			preOrdemRecursivo(this->raiz);
+		} else {
+			cout << "Arvore vazia";
+		}
+
+	}
+
+}
+
+void Tree::preOrdemRecursivo(blocoR *br) {
+	if (br != NULL) {
+
+		br->getRecord().imprime();
+		preOrdemRecursivo(br->getEsq());
+		preOrdemRecursivo(br->getDir());
+	}
+	return;
+}
+
+void Tree::posOrdem() {
+	if (this->raiz != NULL) {
+		if (raiz != NULL) {
+			posOrdemRecursivo(this->raiz);
+		} else {
+			cout << "Arvore vazia";
+		}
+
+	}
+
+}
+
+void Tree::posOrdemRecursivo(blocoR *br) {
+	if (br != NULL) {
+		posOrdemRecursivo(br->getEsq());
+		posOrdemRecursivo(br->getDir());
+		br->getRecord().imprime();
 	}
 	return;
 }
