@@ -14,7 +14,8 @@ private:
 	void centralRecursivo(blocoR *br);
 	void preOrdemRecursivo(blocoR *br);
 	void posOrdemRecursivo(blocoR *br);
-
+	bool comparacaoAlfabetica(string a, string b);
+	void pesquisaRecursiva(blocoR r);
 public:
 	Tree();
 	bool TVazia();
@@ -23,8 +24,21 @@ public:
 	void central();
 	void preOrdem();
 	void posOrdem();
-	void teste(record r);
 	void meuInserir(blocoR r);
+	void pesquisa(string str);
+
+	/*{
+
+		if (*t == NULL) {
+			printf("[ERROR]: Node not found!");
+			return;
+		}
+
+		if ((*t)->reg.key > r.key) { pesquisa(&(*t)->esq, aux, r); return; }
+		if ((*t)->reg.key < r.key) { pesquisa(&(*t)->dir, aux, r); return; }
+
+		*aux = *t;
+	}*/
 	/*void insertTree_alt(Tree **t, Record r);
 
 

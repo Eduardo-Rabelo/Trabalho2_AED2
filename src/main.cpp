@@ -78,32 +78,22 @@ int main() {
     std::wcout.imbue(std::locale());
 
 
-    record r(1), r2(2), r3(3), r4(4), r5(5);
+    record r("abcd"), r2("car"), r3("carlos"), r4("d"), r5("e");
     Tree t;
 
     r.imprime();
     blocoR br(r);
     blocoR br2(r2), br3(r3), br4(r4), br5(r5);
-    br.getRecord().imprime();
+    cout << "Antes de inserir:\n\n";
     t.meuInserir(br3);
     cout << "\n\nInseriu\n\n";
-    br3.setRecord(r2);
-    t.meuInserir(br3);
+
+    t.meuInserir(br2);
     cout << "\n\nInseriu2\n\n";
-    t.meuInserir(br4);
+    t.meuInserir(br5);
     cout << "\n\nInseriu3\n\n";
-    r.setKey(10);
-    br5.setRecord(r);
-    t.meuInserir(br5);
+    t.meuInserir(br4);
     cout << "\n\nInseriu4\n\n";
-    r.setKey(11);
-    br5.setRecord(r);
-    t.meuInserir(br5);
-    cout << "\n\nInseriu5\n\n";
-    r.setKey(6);
-    br5.setRecord(r);
-    t.meuInserir(br5);
-    cout << "\n\nInseriu6\n\n";
 
     cout << "\n\nCentral: \n\n";
     t.central();
@@ -112,6 +102,8 @@ int main() {
     cout << "\n\nPosOrdem: \n\n";
     t.posOrdem();
     cout << "\n\n\ntchau\n\n\n";
+
+    t.pesquisa("car");
     /*
         tabelaHash hp;
         for (int i = 1; i <= numberOfFiles; i++) {

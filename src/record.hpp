@@ -2,14 +2,16 @@
 #define RECORD_HPP
 
 #include <iostream>
+using namespace std;
 class record {
 private:
-	int key, value;
+	int value;
+	string key;
 public:
 	record();
-	record(int key);
-	int getKey();
-	void setKey(int key);
+	record(string key);
+	string getKey();
+	void setKey(string key);
 	int getValue();
 	void setValue(int value);
 	void imprime();

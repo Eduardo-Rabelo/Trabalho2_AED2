@@ -5,19 +5,19 @@ using namespace std;
 
 record::record() {
 	this->value = 0;
-	this->key = 0;
+	this->key = "";
 }
-record::record(int key) {
+record::record(string key) {
 	this->value = 0;
 	this->key = key;
 }
-void record::setKey(int key) {
+void record::setKey(string key) {
 	this->key = key;
 }
 void record::setValue(int value) {
 	this->value = value;
 }
-int record::getKey() {
+string record::getKey() {
 	return this->key;
 }
 int record::getValue() {
