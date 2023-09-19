@@ -1,20 +1,42 @@
 #ifndef BLOCOR_HPP
 #define BLOCOR_HPP
-#include "record.hpp"
+#include "Palavra.hpp"
 #include <iostream>
 using namespace std;
 class blocoR {
 private:
-    record r;
-    blocoR *esq, *dir;
+    Palavra r;
+    blocoR *esq, *dir, *pai;
+    int nivel;
+    int pesoDir;
+    int pesoEsq;
+    int pesoTotal;
 public:
-    blocoR(record r);
-    record getRecord();
+    blocoR();
+    blocoR(Palavra r);
+    Palavra getRecord();
+
     blocoR *getDir();
     void setDir(blocoR *b);
     blocoR *getEsq();
     void setEsq(blocoR *b);
-    void setRecord(record r);
+    blocoR *getPai();
+    void setPai(blocoR *b);
+
+    int getNivel();
+    void setNivel(int n);
+
+    int getPesoDir();
+    void setPesoDir(int p);
+    void addPesoDir();
+
+    int getPesoEsq();
+    void setPesoEsq(int p);
+    void addPesoEsq();
+
+    int getPesoTotal();
+
+    void setRecord(Palavra r);
     bool verDir();
     bool verEsq();
     void verFilhos();

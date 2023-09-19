@@ -2,6 +2,7 @@
 #include "Palavra.hpp"
 #include "record.hpp"
 #include "Tree.hpp"
+#include "avl.hpp"
 #include "hash.hpp"
 #include "bloco.hpp"
 #include <iostream>
@@ -12,7 +13,7 @@
 #include <codecvt>
 
 using namespace std;
-const int numberOfFiles = 2;
+const int numberOfFiles = 4;
 
 /*
 void tiraCaracterEspecial(string *s) {
@@ -78,8 +79,20 @@ int main() {
     std::wcout.imbue(std::locale());
 
 
-    record r("abcd"), r2("car"), r3("carlos"), r4("d"), r5("e");
-    Tree t;
+    Palavra r("abcd"), r2("car"), r3("carlos"), r4("d"), r5("e");
+    avl t;
+    for (int i = 0;i < 3;i++) {
+        r2.add();
+    }
+    for (int i = 0;i < 30;i++) {
+        r3.add();
+    }
+    for (int i = 0;i < 32;i++) {
+        r4.add();
+    }
+    for (int i = 0;i < 11;i++) {
+        r5.add();
+    }
 
     r.imprime();
     blocoR br(r);
@@ -103,69 +116,91 @@ int main() {
     t.posOrdem();
     cout << "\n\n\ntchau\n\n\n";
 
-    t.pesquisa("car");
-    /*
-        tabelaHash hp;
-        for (int i = 1; i <= numberOfFiles; i++) {
-            tabelaHash hpt;
-            string fileName, a, str;
-            stringstream ss;
-            ss << i;
-            ss >> a;
-            fileName = "dataset/filosofia";
-            if (i != 1) {
-                fileName.append(a).append(".txt");
-            } else {
-                fileName.append(".txt");
-            }
-            std::cout << "\n\nfileame:" << fileName << "\n\n";
-            ifstream file(fileName);
-            if (file.is_open()) {
-                string strPalavra;
-                while (getline(file, str)) {
-                    if (str.size() > 0) {
-                        for (int j = 0;j < (int)str.size();j++) {
-                            if (str[j] != '/' && str[j] != '.' && str[j] != ',' && str[j] != '!' && str[j] != '?' && str[j] != ' ' && str[j] != '\n' && str[j] != ';' && str[j] != ':' && str[j] != '-' && str[j] != '"' && str[j] != '\t' && str[j] != '\\' && str[j] != '(' && str[j] != ')' && str[j] != '[' && str[j] != ']' && str[j] != '{' && str[j] != '}' && str[j] != '=' && str[j] != '+' && str[j] != '"') {
-                                str[j] = toLowerAccent(str[j]);
-                                strPalavra.push_back(str[j]);
-                            } else if (str[j] == '-') {
-                                if (str[j + 1] == '-' || (j != 0 && str[j - 1] == '-')) {
-                                    if (strPalavra != "") {
-                                        Palavra p(strPalavra);
-                                        hpt.inserir(p);
-                                        strPalavra = "";
-                                    }
 
-                                } else {
-                                    str[j] = toLowerAccent(str[j]);
-                                    strPalavra.push_back(str[j]);
-                                }
-                            } else {
+    tabelaHash hp;
+    for (int i = 1; i <= numberOfFiles; i++) {
+        tabelaHash hpt;
+        Tree tre;
+        avl avlT;
+        string fileName, a, str;
+        stringstream ss;
+        ss << i;
+        ss >> a;
+        fileName = "dataset/input";
+        if (a != "1") {
+            fileName.append(a);
+        }
+
+
+        fileName.append(".txt");
+
+        std::cout << "\n\nfileame:" << fileName << "\n\n";
+        ifstream file(fileName);
+        if (file.is_open()) {
+            string strPalavra;
+            while (getline(file, str)) {
+                if (str.size() > 0) {
+                    for (int j = 0;j < (int)str.size();j++) {
+                        if (str[j] != '/' && str[j] != '.' && str[j] != ',' && str[j] != '!' && str[j] != '?' && str[j] != ' ' && str[j] != '\n' && str[j] != ';' && str[j] != ':' && str[j] != '-' && str[j] != '"' && str[j] != '\t' && str[j] != '\\' && str[j] != '(' && str[j] != ')' && str[j] != '[' && str[j] != ']' && str[j] != '{' && str[j] != '}' && str[j] != '=' && str[j] != '+' && str[j] != '"') {
+                            str[j] = toLowerAccent(str[j]);
+                            strPalavra.push_back(str[j]);
+                        } else if (str[j] == '-') {
+                            if (str[j + 1] == '-' || (j != 0 && str[j - 1] == '-')) {
                                 if (strPalavra != "") {
                                     Palavra p(strPalavra);
                                     hpt.inserir(p);
                                     strPalavra = "";
                                 }
+
+                            } else {
+                                str[j] = toLowerAccent(str[j]);
+                                strPalavra.push_back(str[j]);
+                            }
+                        } else {
+                            if (strPalavra != "") {
+                                Palavra p(strPalavra);
+                                hpt.inserir(p);
+                                strPalavra = "";
                             }
                         }
-                        if (strPalavra != "") {
-                            Palavra p(strPalavra);
-                            hpt.inserir(p);
-                            strPalavra = "";
-                        }
-
+                    }
+                    if (strPalavra != "") {
+                        Palavra p(strPalavra);
+                        hpt.inserir(p);
+                        strPalavra = "";
                     }
 
                 }
-                file.close();
-            } else {
-                std::cout << "\n\nFile não encontrado\n\n\n";
-            }
-            hpt.imprimeCont();
-            std::cout << "\n\nHEAP:\n\n";
-            hpt.mostraHeap();
-            std::cout << "\n\n\n";
 
-        }*/
+            }
+            file.close();
+        } else {
+            std::cout << "\n\nFile não encontrado\n\n\n";
+        }
+        hpt.imprimeCont();
+        std::cout << "\n\nHEAP:\n\n";
+        hpt.mostraHeap();
+        vector <Palavra> palavras;
+        palavras = hpt.getPalavras();
+
+        std::cout << "\n\n\n";
+        for (int i = 0;i < (int)palavras.size();i++) {
+            tre.meuInserir(palavras[i]);
+            avlT.meuInserir(palavras[i]);
+        }
+        cout << "\n\n\nCENTRAL:\n";
+        tre.central();
+        cout << "\n\n\nCENTRAL AVL:\n";
+        avlT.central();
+        cout << "\n\nPosORDEM:\n";
+        tre.posOrdem();
+        cout << "\n\nAVL PosORDEM:\n";
+        avlT.posOrdem();
+        cout << "\n\nPreORDEM:\n";
+        tre.preOrdem();
+        cout << "\n\nAVL PreORDEM:\n";
+        avlT.preOrdem();
+    }
+    /**/
     return 0;
 }

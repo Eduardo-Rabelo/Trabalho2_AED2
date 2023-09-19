@@ -4,8 +4,7 @@
 #include <vector>
 #include "Palavra.hpp"
 using namespace std;
-class heap
-{
+class heap {
 private:
     int tam;
     vector<Palavra> palavras;
@@ -13,9 +12,11 @@ private:
     void opera();
 
 public:
+    heap();
     heap(int tam, Palavra v[]);
     void imprime();
     bool addPalavra(Palavra p);
+    vector<Palavra> getPalavras();
 };
 
 #endif

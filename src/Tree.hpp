@@ -1,9 +1,8 @@
 #ifndef ARVORE_HPP
 #define ARVORE_HPP
 #include <iostream>
-#include "record.hpp"
+#include "Palavra.hpp"
 #include "blocoR.hpp"
-#include "record.hpp"
 using namespace std;
 
 class Tree {
@@ -20,7 +19,7 @@ public:
 	Tree();
 	bool TVazia();
 
-	void inserir(record r);
+	void inserir(Palavra r);
 	void central();
 	void preOrdem();
 	void posOrdem();

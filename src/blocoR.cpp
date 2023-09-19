@@ -2,13 +2,28 @@
 #include <iostream>
 using namespace std;
 
-blocoR::blocoR(record r) {
+blocoR::blocoR() {
+	this->dir = NULL;
+	this->esq = NULL;
+	this->pai = NULL;
+	this->pesoDir = 0;
+	this->pesoEsq = 0;
+	this->pesoTotal = 0;
+	this->nivel = 0;
+}
+
+blocoR::blocoR(Palavra r) {
 	this->r = r;
 	this->dir = NULL;
 	this->esq = NULL;
+	this->pai = NULL;
+	this->pesoDir = 0;
+	this->pesoEsq = 0;
+	this->pesoTotal = 0;
+	this->nivel = 0;
 }
 
-record blocoR::getRecord() {
+Palavra blocoR::getRecord() {
 	return this->r;
 }
 
@@ -17,6 +32,13 @@ blocoR *blocoR::getDir() {
 }
 void blocoR::setDir(blocoR *b) {
 	this->dir = b;
+}
+
+blocoR *blocoR::getPai() {
+	return this->pai;
+}
+void blocoR::setPai(blocoR *b) {
+	this->pai = b;
 }
 
 blocoR *blocoR::getEsq() {
@@ -55,6 +77,38 @@ void blocoR::verFilhos() {
 	}
 }
 
-void blocoR::setRecord(record r) {
+void blocoR::setRecord(Palavra r) {
 	this->r = r;
+}
+
+int blocoR::getNivel() {
+	return this->nivel;
+}
+void blocoR::setNivel(int n) {
+	this->nivel = n;
+}
+
+int blocoR::getPesoDir() {
+	return this->pesoDir;
+}
+void blocoR::setPesoDir(int p) {
+	this->pesoDir = p;
+}
+void blocoR::addPesoDir() {
+	this->pesoDir = this->pesoDir + 1;
+}
+
+int blocoR::getPesoEsq() {
+	return this->pesoEsq;
+}
+void blocoR::setPesoEsq(int p) {
+	this->pesoEsq = p;
+}
+void blocoR::addPesoEsq() {
+	this->pesoEsq = this->pesoEsq + 1;
+}
+
+int blocoR::getPesoTotal() {
+	this->pesoTotal = this->pesoDir - this->pesoEsq;
+	return this->pesoTotal;
 }

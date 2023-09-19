@@ -149,10 +149,13 @@ void tabelaHash::mostraHeap() {
         }
 
     }
+    this->palavras = hi.getPalavras();
     hi.imprime();
 
 }
-
+vector<Palavra> tabelaHash::getPalavras() {
+    return this->palavras;
+}
 void tabelaHash::imprimeCont() {
     cout << "Palavras na hash: " << this->cont;
 }

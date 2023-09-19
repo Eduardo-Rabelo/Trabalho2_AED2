@@ -7,10 +7,11 @@
 #include <locale>
 #include <codecvt>
 #define tam 13
-#define tamHeap 10
+#define tamHeap 5
 using namespace std;
 class tabelaHash {
 private:
+    vector<Palavra> palavras;
     int cont = 0;
     bloco hashBlocos[tam];
     int t = tam;
@@ -24,10 +25,11 @@ public:
     tabelaHash();
     void inserir(Palavra p);
     void imprimeHash();
-    void mostrarHeap();
     Palavra *vetor(int tamanho);
     void mostraHeap();
     void imprimeCont();
+    vector<Palavra> getPalavras();
+
 
 };
 #endif

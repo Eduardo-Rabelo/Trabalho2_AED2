@@ -1,14 +1,14 @@
-#include "Tree.hpp"
+#include "avl.hpp"
 #include "blocoR.hpp"
 #include <iostream>
 using namespace std;
 
-Tree::Tree() {
+avl::avl() {
 	this->raiz = NULL;
 	this->morto = NULL;
 }
 
-bool Tree::TVazia() {
+bool avl::TVazia() {
 	if (this->raiz == NULL) {
 		return true;
 	} else {
@@ -16,7 +16,7 @@ bool Tree::TVazia() {
 	}
 }
 
-void Tree::meuInserir(blocoR r) {
+void avl::meuInserir(blocoR r) {
 	bool end = false;
 
 	blocoR *br = new blocoR(r), *aux = new blocoR(r);
@@ -24,12 +24,16 @@ void Tree::meuInserir(blocoR r) {
 	aux->setDir(this->morto);
 	aux->setEsq(this->morto);
 	aux->setPai(this->morto);
+	//aux->setPesoDir(0);
+	//aux->setPesoEsq(0);
+	aux->setNivel(0);
 
 	if (this->raiz == NULL) {
 		this->raiz = aux;
 		this->raiz->setDir(this->morto);
 		this->raiz->setEsq(this->morto);
 		this->raiz->setPai(this->morto);
+		this->raiz->setNivel(0);
 		this->raiz->getRecord().imprime();
 		//this->raiz->verFilhos();
 		//cout << "\nEntrei no if\n";
@@ -44,8 +48,10 @@ void Tree::meuInserir(blocoR r) {
 			} else if (aux->getRecord().getFrequencia() > br->getRecord().getFrequencia()) {
 				cout << "\nDIREITA\n";
 				if (br->getDir() == NULL) {
+					aux->setNivel(br->getNivel() + 1);
 					br->setDir(aux);
 					br->getDir()->setPai(br);
+					//rebalanceia(br, true);
 					end = true;
 				} else {
 					br = br->getDir();
@@ -53,8 +59,10 @@ void Tree::meuInserir(blocoR r) {
 			} else if (aux->getRecord().getFrequencia() <= br->getRecord().getFrequencia()) {
 				cout << "\nESQUERDA\n";
 				if (br->getEsq() == NULL) {
+					aux->setNivel(br->getNivel() + 1);
 					br->setEsq(aux);
 					br->getEsq()->setPai(br);
+					//rebalanceia(br, false);
 					end = true;
 				} else {
 					br = br->getEsq();
@@ -75,7 +83,44 @@ void Tree::meuInserir(blocoR r) {
 	delete br;
 }
 /*
-void Tree::pesquisa(string str) {
+void avl::rebalanceia(blocoR *br, bool dir) {
+
+	blocoR *b = new blocoR();
+	if (dir) {
+		b->addPesoDir();
+	} else {
+		b->addPesoEsq();
+	}
+	while (b->getPai() != NULL) {
+		//if (b->getPesoTotal() >= 2 || b->getPesoTotal() <= -2) {
+		//}
+		if (filhoDireito(b)) {
+			b = b->getPai();
+			b->addPesoDir();
+		} else if (filhoEsquerdo(b)) {
+			b = b->getPai();
+			b->addPesoEsq();
+		} else {
+			cout << "\n\n\nERRO FILHO\n\n\n";
+		}
+	}
+
+}*/
+
+bool avl::filhoDireito(blocoR *br) {
+	if (br->getPai()->getDir() == br) {
+		return true;
+	}
+	return false;
+}
+bool avl::filhoEsquerdo(blocoR *br) {
+	if (br->getPai()->getEsq() == br) {
+		return true;
+	}
+	return false;
+}
+/*
+void avl::pesquisa(string str) {
 	record *re = new record(str);
 	blocoR *r = new blocoR(*re);
 
@@ -85,7 +130,7 @@ void Tree::pesquisa(string str) {
 		pesquisaRecursiva(*r);
 	}
 }
-void Tree::pesquisaRecursiva(blocoR r) {
+void avl::pesquisaRecursiva(blocoR r) {
 	blocoR *br = new blocoR(r), *aux = new blocoR(r);
 	aux = &r;
 	if (this->raiz == NULL) {
@@ -100,7 +145,7 @@ void Tree::pesquisaRecursiva(blocoR r) {
 	}
 }*/
 
-void Tree::central() {
+void avl::central() {
 	if (this->raiz != NULL) {
 		if (raiz != NULL) {
 			//cout << "\n\nRecursão:";
@@ -113,7 +158,7 @@ void Tree::central() {
 
 }
 
-void Tree::centralRecursivo(blocoR *br) {
+void avl::centralRecursivo(blocoR *br) {
 	if (br != NULL) {
 		centralRecursivo(br->getEsq());
 		br->getRecord().imprime();
@@ -123,7 +168,7 @@ void Tree::centralRecursivo(blocoR *br) {
 }
 
 
-void Tree::preOrdem() {
+void avl::preOrdem() {
 	if (this->raiz != NULL) {
 		if (raiz != NULL) {
 			preOrdemRecursivo(this->raiz);
@@ -135,7 +180,7 @@ void Tree::preOrdem() {
 
 }
 
-void Tree::preOrdemRecursivo(blocoR *br) {
+void avl::preOrdemRecursivo(blocoR *br) {
 	if (br != NULL) {
 
 		br->getRecord().imprime();
@@ -145,7 +190,7 @@ void Tree::preOrdemRecursivo(blocoR *br) {
 	return;
 }
 
-void Tree::posOrdem() {
+void avl::posOrdem() {
 	if (this->raiz != NULL) {
 		if (raiz != NULL) {
 			posOrdemRecursivo(this->raiz);
@@ -157,7 +202,7 @@ void Tree::posOrdem() {
 
 }
 
-void Tree::posOrdemRecursivo(blocoR *br) {
+void avl::posOrdemRecursivo(blocoR *br) {
 	if (br != NULL) {
 		posOrdemRecursivo(br->getEsq());
 		posOrdemRecursivo(br->getDir());
@@ -166,7 +211,7 @@ void Tree::posOrdemRecursivo(blocoR *br) {
 	return;
 }
 
-bool Tree::comparacaoAlfabetica(string a, string b) {
+bool avl::comparacaoAlfabetica(string a, string b) {
 
 	if (a.size() < b.size()) {
 		for (int i = 0; i < (int)a.size(); i++) {
@@ -188,11 +233,27 @@ bool Tree::comparacaoAlfabetica(string a, string b) {
 		return true;
 	}
 }
+
 /*
-void insertTree(Tree **t, Record r){
+int avl::getPesoDir(blocoR r) {
+	blocoR *br = new blocoR(r), *aux = new blocoR(r);
+	br = &r;
+	aux = &r;
+	br=
+	aux = NULL;
+	delete aux;
+	br = NULL;
+	delete br;
+}*/
+
+
+
+
+/*
+void insertTree(avl **t, Record r){
 
   if(TVazia(t)){
-	*t = (Tree*)malloc(sizeof(Tree));
+	*t = (avl*)malloc(sizeof(avl));
 	(*t)->esq = NULL;
 	(*t)->dir = NULL;
 	(*t)->reg = r;
