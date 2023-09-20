@@ -24,8 +24,8 @@ void avl::meuInserir(blocoR r) {
 	aux->setDir(this->morto);
 	aux->setEsq(this->morto);
 	aux->setPai(this->morto);
-	//aux->setPesoDir(0);
-	//aux->setPesoEsq(0);
+	aux->setPesoDir(0);
+	aux->setPesoEsq(0);
 	aux->setNivel(0);
 
 	if (this->raiz == NULL) {
@@ -51,7 +51,7 @@ void avl::meuInserir(blocoR r) {
 					aux->setNivel(br->getNivel() + 1);
 					br->setDir(aux);
 					br->getDir()->setPai(br);
-					//rebalanceia(br, true);
+					rebalanceia(br, true);
 					end = true;
 				} else {
 					br = br->getDir();
@@ -62,7 +62,7 @@ void avl::meuInserir(blocoR r) {
 					aux->setNivel(br->getNivel() + 1);
 					br->setEsq(aux);
 					br->getEsq()->setPai(br);
-					//rebalanceia(br, false);
+					rebalanceia(br, false);
 					end = true;
 				} else {
 					br = br->getEsq();
@@ -82,10 +82,10 @@ void avl::meuInserir(blocoR r) {
 	br = NULL;
 	delete br;
 }
-/*
-void avl::rebalanceia(blocoR *br, bool dir) {
 
+void avl::rebalanceia(blocoR *br, bool dir) {
 	blocoR *b = new blocoR();
+	b = br;
 	if (dir) {
 		b->addPesoDir();
 	} else {
@@ -94,18 +94,70 @@ void avl::rebalanceia(blocoR *br, bool dir) {
 	while (b->getPai() != NULL) {
 		//if (b->getPesoTotal() >= 2 || b->getPesoTotal() <= -2) {
 		//}
+		if (b->getPesoTotal() >= 2) {
+
+			if (b->getDir()->getPesoTotal() >= 0) {
+				rotacaoSimplesEsquerda(b);
+			}
+
+		} else if (b->getPesoTotal() < -2) {
+			if (b->getEsq()->getPesoTotal() >= 0) {
+				rotacaoSimplesDireita(b);
+			}
+		}
 		if (filhoDireito(b)) {
 			b = b->getPai();
-			b->addPesoDir();
+			if (b->getDir()->getPesoDir() > b->getDir()->getPesoEsq()) {
+				b->setPesoDir(b->getDir()->getPesoDir() + 1);
+			} else if (b->getDir()->getPesoDir() <= b->getDir()->getPesoEsq()) {
+				b->setPesoDir(b->getDir()->getPesoEsq() + 1);
+			} else {
+				cout << "ERRO DE PESO ";
+			}
+			//b->addPesoDir();
 		} else if (filhoEsquerdo(b)) {
 			b = b->getPai();
-			b->addPesoEsq();
+			if (b->getEsq()->getPesoDir() > b->getEsq()->getPesoEsq()) {
+				b->setPesoEsq(b->getEsq()->getPesoDir() + 1);
+			} else if (b->getEsq()->getPesoDir() <= b->getEsq()->getPesoEsq()) {
+				b->setPesoEsq(b->getEsq()->getPesoEsq() + 1);
+			} else {
+				cout << "ERRO DE PESO ";
+			}
 		} else {
 			cout << "\n\n\nERRO FILHO\n\n\n";
 		}
 	}
+	b = NULL;
+	delete b;
 
-}*/
+}
+
+void avl::rotacaoSimplesEsquerda(blocoR *br) {
+	blocoR *b = new blocoR, *aux = new blocoR;
+
+	b = br->getDir();
+	aux = br;
+
+	b->setPai(br->getPai());
+
+	aux->setDir(b->getEsq());
+	b->getEsq()->setPai(aux);
+
+	b->setEsq(aux);
+	if (filhoDireito(aux)) {
+		aux->getPai()->setDir(b);
+		aux->setPai(b);
+	} /*else if (filhoEsquerdo(aux)) {  //////Não faz sentido esse caso, pois a rotação pra esquerda
+										//////Só ocorre se peso direito for maior
+		aux->getPai()->setEsq(b);
+	}*/
+	else {
+		cout << "ERRO FILHO 2";
+	}
+
+
+}
 
 bool avl::filhoDireito(blocoR *br) {
 	if (br->getPai()->getDir() == br) {
@@ -161,7 +213,7 @@ void avl::central() {
 void avl::centralRecursivo(blocoR *br) {
 	if (br != NULL) {
 		centralRecursivo(br->getEsq());
-		br->getRecord().imprime();
+		br->imprime();
 		centralRecursivo(br->getDir());
 	}
 	return;
@@ -183,7 +235,7 @@ void avl::preOrdem() {
 void avl::preOrdemRecursivo(blocoR *br) {
 	if (br != NULL) {
 
-		br->getRecord().imprime();
+		br->imprime();
 		preOrdemRecursivo(br->getEsq());
 		preOrdemRecursivo(br->getDir());
 	}
@@ -206,7 +258,7 @@ void avl::posOrdemRecursivo(blocoR *br) {
 	if (br != NULL) {
 		posOrdemRecursivo(br->getEsq());
 		posOrdemRecursivo(br->getDir());
-		br->getRecord().imprime();
+		br->imprime();
 	}
 	return;
 }

@@ -7,7 +7,7 @@
 #include <locale>
 #include <codecvt>
 #define tam 13
-#define tamHeap 5
+#define tamHeap 10
 using namespace std;
 class tabelaHash {
 private:

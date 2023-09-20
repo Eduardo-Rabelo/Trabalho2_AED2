@@ -93,9 +93,11 @@ int blocoR::getPesoDir() {
 }
 void blocoR::setPesoDir(int p) {
 	this->pesoDir = p;
+	calculaPesoTotal();
 }
 void blocoR::addPesoDir() {
 	this->pesoDir = this->pesoDir + 1;
+	calculaPesoTotal();
 }
 
 int blocoR::getPesoEsq() {
@@ -103,12 +105,27 @@ int blocoR::getPesoEsq() {
 }
 void blocoR::setPesoEsq(int p) {
 	this->pesoEsq = p;
+	calculaPesoTotal();
 }
 void blocoR::addPesoEsq() {
 	this->pesoEsq = this->pesoEsq + 1;
+	calculaPesoTotal();
 }
 
 int blocoR::getPesoTotal() {
-	this->pesoTotal = this->pesoDir - this->pesoEsq;
+	calculaPesoTotal();
 	return this->pesoTotal;
+}
+
+void blocoR::imprime() {
+	this->r.imprime();
+	cout << "\nNível: " << this->nivel;
+	cout << "\nPesoEsq: " << this->pesoEsq;
+	cout << "\nPesoDir: " << this->pesoDir;
+	cout << "\nPesoTotal: " << this->pesoTotal;
+
+}
+
+void blocoR::calculaPesoTotal() {
+	this->pesoTotal = this->pesoDir - this->pesoEsq;
 }

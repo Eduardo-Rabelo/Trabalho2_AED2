@@ -13,7 +13,7 @@
 #include <codecvt>
 
 using namespace std;
-const int numberOfFiles = 4;
+const int numberOfFiles = 1;
 
 /*
 void tiraCaracterEspecial(string *s) {

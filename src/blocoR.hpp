@@ -11,6 +11,7 @@ private:
     int pesoDir;
     int pesoEsq;
     int pesoTotal;
+    void calculaPesoTotal();
 public:
     blocoR();
     blocoR(Palavra r);
@@ -36,10 +37,13 @@ public:
 
     int getPesoTotal();
 
+
     void setRecord(Palavra r);
     bool verDir();
     bool verEsq();
     void verFilhos();
+
+    void imprime();
     //~bloco();
 
 };

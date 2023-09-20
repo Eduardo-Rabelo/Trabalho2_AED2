@@ -29,10 +29,16 @@ public:
 	void rebalanceia();
 
 	void rebalanceia(blocoR *br, bool dir);
-	void calculaPesoEsq(blocoR *br);
-	void calculaPesoDir(blocoR *br);
+	//void calculaPesoEsq(blocoR *br);
+	//void calculaPesoDir(blocoR *br);
 
 	bool filhoDireito(blocoR *br);
 	bool filhoEsquerdo(blocoR *br);
+
+	void rotacaoSimplesDireita(blocoR *br);
+	void rotacaoSimplesEsquerda(blocoR *br);
+	void rotacaoDuplaDireita(blocoR *br);
+	void rotacaoDuplaEsquerda(blocoR *br);
+
 };
 #endif
