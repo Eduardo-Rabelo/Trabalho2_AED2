@@ -12,6 +12,8 @@ private:
 	void preOrdemRecursivo(blocoR *br);
 	void posOrdemRecursivo(blocoR *br);
 	bool comparacaoAlfabetica(string a, string b);
+	void pesarDireita(blocoR *br);
+	void pesarEsquerda(blocoR *br);
 
 public:
 	avl();
@@ -39,6 +41,7 @@ public:
 	void rotacaoSimplesEsquerda(blocoR *br);
 	void rotacaoDuplaDireita(blocoR *br);
 	void rotacaoDuplaEsquerda(blocoR *br);
+	void rotacoes(blocoR *br);
 
 };
 #endif

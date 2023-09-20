@@ -78,45 +78,45 @@ int main() {
     std::setlocale(LC_ALL, "pt_BR.utf8");
     std::wcout.imbue(std::locale());
 
+    /*
+        Palavra r("abcd"), r2("car"), r3("carlos"), r4("d"), r5("e");
+        avl t;
+        for (int i = 0;i < 3;i++) {
+            r2.add();
+        }
+        for (int i = 0;i < 30;i++) {
+            r3.add();
+        }
+        for (int i = 0;i < 32;i++) {
+            r4.add();
+        }
+        for (int i = 0;i < 11;i++) {
+            r5.add();
+        }
 
-    Palavra r("abcd"), r2("car"), r3("carlos"), r4("d"), r5("e");
-    avl t;
-    for (int i = 0;i < 3;i++) {
-        r2.add();
-    }
-    for (int i = 0;i < 30;i++) {
-        r3.add();
-    }
-    for (int i = 0;i < 32;i++) {
-        r4.add();
-    }
-    for (int i = 0;i < 11;i++) {
-        r5.add();
-    }
+        r.imprime();
+        blocoR br(r);
+        blocoR br2(r2), br3(r3), br4(r4), br5(r5);
+        cout << "Antes de inserir:\n\n";
+        t.meuInserir(br3);
+        cout << "\n\nInseriu\n\n";
 
-    r.imprime();
-    blocoR br(r);
-    blocoR br2(r2), br3(r3), br4(r4), br5(r5);
-    cout << "Antes de inserir:\n\n";
-    t.meuInserir(br3);
-    cout << "\n\nInseriu\n\n";
+        t.meuInserir(br2);
+        cout << "\n\nInseriu2\n\n";
+        t.meuInserir(br5);
+        cout << "\n\nInseriu3\n\n";
+        t.meuInserir(br4);
+        cout << "\n\nInseriu4\n\n";
 
-    t.meuInserir(br2);
-    cout << "\n\nInseriu2\n\n";
-    t.meuInserir(br5);
-    cout << "\n\nInseriu3\n\n";
-    t.meuInserir(br4);
-    cout << "\n\nInseriu4\n\n";
+        cout << "\n\nCentral: \n\n";
+        t.central();
+        cout << "\n\nPreOrdem: \n\n";
+        t.preOrdem();
+        cout << "\n\nPosOrdem: \n\n";
+        t.posOrdem();
+        cout << "\n\n\ntchau\n\n\n";
 
-    cout << "\n\nCentral: \n\n";
-    t.central();
-    cout << "\n\nPreOrdem: \n\n";
-    t.preOrdem();
-    cout << "\n\nPosOrdem: \n\n";
-    t.posOrdem();
-    cout << "\n\n\ntchau\n\n\n";
-
-
+    */
     tabelaHash hp;
     for (int i = 1; i <= numberOfFiles; i++) {
         tabelaHash hpt;
@@ -185,7 +185,7 @@ int main() {
 
         std::cout << "\n\n\n";
         for (int i = 0;i < (int)palavras.size();i++) {
-            tre.meuInserir(palavras[i]);
+            //tre.meuInserir(palavras[i]);////////////////////////DESCOMENTAR
             avlT.meuInserir(palavras[i]);
         }
         cout << "\n\n\nCENTRAL:\n";

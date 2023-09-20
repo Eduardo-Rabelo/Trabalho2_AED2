@@ -35,6 +35,9 @@ void blocoR::setDir(blocoR *b) {
 }
 
 blocoR *blocoR::getPai() {
+	if (this->pai == NULL) {
+		return NULL;
+	}
 	return this->pai;
 }
 void blocoR::setPai(blocoR *b) {
@@ -118,11 +121,13 @@ int blocoR::getPesoTotal() {
 }
 
 void blocoR::imprime() {
+
 	this->r.imprime();
 	cout << "\nNível: " << this->nivel;
 	cout << "\nPesoEsq: " << this->pesoEsq;
 	cout << "\nPesoDir: " << this->pesoDir;
 	cout << "\nPesoTotal: " << this->pesoTotal;
+
 
 }
 
