@@ -138,7 +138,10 @@ void avl::rotacoes(blocoR *br) {
 	else if (b->getPesoTotal() <= -2) {
 		if (b->getEsq()->getPesoTotal() < 0) {
 			cout << "\nROTACAO SIMPLES DIREITA\n";
-			rotacaoSimplesDireita(b);////////FFALTA ISSO AINDA
+			rotacaoSimplesDireita(b);
+		} else if (b->getEsq()->getPesoTotal() >= 0) {
+			cout << "\nROTACAO DUPLA DIREITA\n";
+			rotacaoDuplaDireita(b);
 		}
 	}
 }
@@ -254,9 +257,16 @@ void avl::rotacaoDuplaEsquerda(blocoR *br) {
 	b = br;
 	cout << "ROTACAO SIMPLES DIREITA";
 	rotacaoSimplesDireita(b->getDir());
-	//cout << "\nESQUERDA\n";
-	//rotacaoSimplesEsquerda(b);
-	//cout << "\nDireita\n";
+	b = NULL;
+	delete b;
+
+}
+
+void avl::rotacaoDuplaDireita(blocoR *br) {
+	blocoR *b = new blocoR;
+	b = br;
+	cout << "ROTACAO SIMPLES Esquerda";
+	rotacaoSimplesEsquerda(b->getEsq());
 	b = NULL;
 	delete b;
 
