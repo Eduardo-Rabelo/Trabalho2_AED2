@@ -55,7 +55,7 @@ void avl::meuInserir(blocoR r) {
 					cout << "\nINSERI\n";
 					aux->imprime();
 					cout << "\n\n";
-					rebalanceia(br, true);
+					rebalanceia(br, true, true);
 					end = true;
 				} else {
 					br = br->getDir();
@@ -69,7 +69,7 @@ void avl::meuInserir(blocoR r) {
 					cout << "\nINSERI\n";
 					aux->imprime();
 					cout << "\n\n";
-					rebalanceia(br, false);
+					rebalanceia(br, false, true);
 					end = true;
 				} else {
 					br = br->getEsq();
@@ -90,24 +90,24 @@ void avl::meuInserir(blocoR r) {
 	delete br;
 }
 
-void avl::rebalanceia(blocoR *br, bool dir) {
+void avl::rebalanceia(blocoR *br, bool dir, bool insertion) {
 	blocoR *b = new blocoR();
 	b = br;
-	if (dir) {
-		b->addPesoDir();
-	} else {
-		b->addPesoEsq();
+	if (insertion == true) {
+		if (dir) {
+			b->addPesoDir();
+		} else {
+			b->addPesoEsq();
+		}
 	}
+
 	while (b->getPai() != NULL) {
-		//if (b->getPesoTotal() >= 2 || b->getPesoTotal() <= -2) {
-		//}
 
 		rotacoes(b);
 
 		if (filhoDireito(b)) {
 			b = b->getPai();
 			pesarDireita(b);
-			//b->addPesoDir();
 		} else if (filhoEsquerdo(b)) {
 			b = b->getPai();
 			pesarEsquerda(b);
@@ -134,7 +134,8 @@ void avl::rotacoes(blocoR *br) {
 
 	else if (b->getPesoTotal() <= -2) {
 		if (b->getEsq()->getPesoTotal() < 0) {
-			cout << "\nROTACAO SIMPLESDIREITA\n";//rotacaoSimplesDireita(b);
+			cout << "\nROTACAO SIMPLES DIREITA\n";
+			rotacaoSimplesDireita(b);////////FFALTA ISSO AINDA
 		}
 	}
 }
@@ -158,10 +159,13 @@ void avl::rotacaoSimplesEsquerda(blocoR *br) {
 		if (aux->getPai() != NULL) {
 			aux->getPai()->setDir(b);
 		}
-		aux->setPai(b);
 	} else {
-		cout << "ERRO FILHO 2";
+		if (aux->getPai() != NULL) {
+			aux->getPai()->setEsq(b);
+		}
+		cout << "ELSE FILHO 2";
 	}
+	aux->setPai(b);
 	int intAux = b->getNivel();
 	b->setNivel(aux->getNivel());
 	aux->setNivel(intAux);
@@ -171,6 +175,11 @@ void avl::rotacaoSimplesEsquerda(blocoR *br) {
 
 	aux->imprime();
 	b->imprime();
+	if (filhoDireito(b)) {
+		rebalanceia(b, true, false);
+	} else if (filhoEsquerdo(b)) {
+		rebalanceia(b, false, false);
+	}
 	cout << "\n\n\n";
 	aux = NULL;
 	delete aux;
@@ -179,9 +188,69 @@ void avl::rotacaoSimplesEsquerda(blocoR *br) {
 
 }
 
+
+
+void avl::rotacaoSimplesDireita(blocoR *br) {
+	blocoR *b = new blocoR, *aux = new blocoR;
+
+	b = br->getEsq();
+	aux = br;
+
+	b->setPai(br->getPai());
+
+	aux->setEsq(b->getDir());
+	if (b->getDir() != NULL) {
+		b->getDir()->setPai(aux);
+	}
+
+	b->setDir(aux);
+
+	if (filhoEsquerdo(aux)) {
+		if (aux->getPai() != NULL) {
+			aux->getPai()->setEsq(b);
+		}
+	} else {
+		if (aux->getPai() != NULL) {
+			aux->getPai()->setDir(b);
+		}
+		cout << "ELSE FILHO 2";
+	}
+
+	aux->setPai(b);
+	cout << "\nATE AQUI FOI\n";
+
+	int intAux = b->getNivel();
+	b->setNivel(aux->getNivel());
+	aux->setNivel(intAux);
+	aux->imprime();
+	b->imprime();
+	pesarEsquerda(aux);
+	pesarDireita(b);
+
+	aux->imprime();
+	b->imprime();
+	if (filhoDireito(b)) {
+		rebalanceia(b, true, false);
+	} else if (filhoEsquerdo(b)) {
+		rebalanceia(b, false, false);
+	}
+	cout << "\n\n\n";
+
+	aux = NULL;
+	delete aux;
+	b = NULL;
+	delete b;
+
+
+}
+
 void avl::pesarDireita(blocoR *br) {
 	blocoR *b = new blocoR;
 	b = br;
+	if (b->getDir() == NULL) {
+		b->setPesoDir(0);
+		return;
+	}
 	if (b->getDir()->getPesoDir() > b->getDir()->getPesoEsq()) {
 		b->setPesoDir(b->getDir()->getPesoDir() + 1);
 	} else if (b->getDir()->getPesoDir() <= b->getDir()->getPesoEsq()) {
@@ -195,6 +264,10 @@ void avl::pesarDireita(blocoR *br) {
 void avl::pesarEsquerda(blocoR *br) {
 	blocoR *b = new blocoR;
 	b = br;
+	if (b->getEsq() == NULL) {
+		b->setPesoEsq(0);
+		return;
+	}
 	if (b->getEsq()->getPesoDir() > b->getEsq()->getPesoEsq()) {
 		b->setPesoEsq(b->getEsq()->getPesoDir() + 1);
 	} else if (b->getEsq()->getPesoDir() <= b->getEsq()->getPesoEsq()) {
@@ -206,28 +279,6 @@ void avl::pesarEsquerda(blocoR *br) {
 	delete b;
 }
 
-
-void avl::rotacaoSimplesDireita(blocoR *br) {
-	blocoR *b = new blocoR, *aux = new blocoR;
-
-	b = br->getEsq();
-	aux = br;
-
-	b->setPai(br->getPai());
-
-	aux->setEsq(b->getDir());
-	b->getDir()->setPai(aux);
-
-	b->setDir(aux);
-	if (filhoEsquerdo(aux)) {
-		aux->getPai()->setEsq(b);
-		aux->setPai(b);
-	} else {
-		cout << "ERRO FILHO 2";
-	}
-
-
-}
 
 bool avl::filhoDireito(blocoR *br) {
 	if (br->getPai()->getDir() == br) {

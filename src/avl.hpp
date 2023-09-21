@@ -30,7 +30,7 @@ public:
 	//bool getPesoTotal(blocoR r);
 	void rebalanceia();
 
-	void rebalanceia(blocoR *br, bool dir);
+	void rebalanceia(blocoR *br, bool dir, bool insertion);
 	//void calculaPesoEsq(blocoR *br);
 	//void calculaPesoDir(blocoR *br);
 
