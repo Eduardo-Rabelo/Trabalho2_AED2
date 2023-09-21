@@ -9,7 +9,7 @@ blocoR::blocoR() {
 	this->pesoDir = 0;
 	this->pesoEsq = 0;
 	this->pesoTotal = 0;
-	this->nivel = 0;
+	//this->nivel = 0;
 }
 
 blocoR::blocoR(Palavra r) {
@@ -20,7 +20,7 @@ blocoR::blocoR(Palavra r) {
 	this->pesoDir = 0;
 	this->pesoEsq = 0;
 	this->pesoTotal = 0;
-	this->nivel = 0;
+	//this->nivel = 0;
 }
 
 Palavra blocoR::getRecord() {
@@ -83,13 +83,13 @@ void blocoR::verFilhos() {
 void blocoR::setRecord(Palavra r) {
 	this->r = r;
 }
-
+/*
 int blocoR::getNivel() {
 	return this->nivel;
 }
 void blocoR::setNivel(int n) {
 	this->nivel = n;
-}
+}*/
 
 int blocoR::getPesoDir() {
 	return this->pesoDir;
@@ -123,7 +123,7 @@ int blocoR::getPesoTotal() {
 void blocoR::imprime() {
 
 	this->r.imprime();
-	cout << "\nNível: " << this->nivel;
+	//cout << "\nNível: " << this->nivel;
 	cout << "\nPesoEsq: " << this->pesoEsq;
 	cout << "\nPesoDir: " << this->pesoDir;
 	cout << "\nPesoTotal: " << this->pesoTotal;

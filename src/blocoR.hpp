@@ -7,7 +7,7 @@ class blocoR {
 private:
     Palavra r;
     blocoR *esq, *dir, *pai;
-    int nivel;
+    //int nivel;
     int pesoDir;
     int pesoEsq;
     int pesoTotal;
@@ -24,8 +24,8 @@ public:
     blocoR *getPai();
     void setPai(blocoR *b);
 
-    int getNivel();
-    void setNivel(int n);
+    //int getNivel();
+    //void setNivel(int n);
 
     int getPesoDir();
     void setPesoDir(int p);

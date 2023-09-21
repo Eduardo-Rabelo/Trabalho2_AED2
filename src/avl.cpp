@@ -26,14 +26,14 @@ void avl::meuInserir(blocoR r) {
 	aux->setPai(this->morto);
 	aux->setPesoDir(0);
 	aux->setPesoEsq(0);
-	aux->setNivel(0);
+	//aux->setNivel(0);
 
 	if (this->raiz == NULL) {
 		this->raiz = aux;
 		this->raiz->setDir(this->morto);
 		this->raiz->setEsq(this->morto);
 		this->raiz->setPai(this->morto);
-		this->raiz->setNivel(0);
+		//this->raiz->setNivel(0);
 		this->raiz->getRecord().imprime();
 		cout << "\nINSERI RAIZ\n";
 		//this->raiz->verFilhos();
@@ -49,7 +49,7 @@ void avl::meuInserir(blocoR r) {
 			} else if (aux->getRecord().getFrequencia() > br->getRecord().getFrequencia()) {
 				cout << "\nDIREITA\n";
 				if (br->getDir() == NULL) {
-					aux->setNivel(br->getNivel() + 1);
+					//aux->setNivel(br->getNivel() + 1);
 					br->setDir(aux);
 					br->getDir()->setPai(br);
 					cout << "\nINSERI\n";
@@ -63,7 +63,7 @@ void avl::meuInserir(blocoR r) {
 			} else if (aux->getRecord().getFrequencia() <= br->getRecord().getFrequencia()) {
 				cout << "\nESQUERDA\n";
 				if (br->getEsq() == NULL) {
-					aux->setNivel(br->getNivel() + 1);
+					//aux->setNivel(br->getNivel() + 1);
 					br->setEsq(aux);
 					br->getEsq()->setPai(br);
 					cout << "\nINSERI\n";
@@ -128,6 +128,9 @@ void avl::rotacoes(blocoR *br) {
 		if (b->getDir()->getPesoTotal() >= 0) {
 			cout << "\nROTACAO SIMPLES ESQUERDA\n";
 			rotacaoSimplesEsquerda(b);
+		} else if (b->getDir()->getPesoTotal() < 0) {
+			cout << "\nROTACAO DUPLA ESQUERDA\n";
+			rotacaoDuplaEsquerda(b);
 		}
 
 	}
@@ -166,10 +169,11 @@ void avl::rotacaoSimplesEsquerda(blocoR *br) {
 		cout << "ELSE FILHO 2";
 	}
 	aux->setPai(b);
+	/*
 	int intAux = b->getNivel();
 	b->setNivel(aux->getNivel());
 	aux->setNivel(intAux);
-
+*/
 	pesarDireita(aux);
 	pesarEsquerda(b);
 
@@ -218,10 +222,11 @@ void avl::rotacaoSimplesDireita(blocoR *br) {
 
 	aux->setPai(b);
 	cout << "\nATE AQUI FOI\n";
-
+	/*
 	int intAux = b->getNivel();
 	b->setNivel(aux->getNivel());
 	aux->setNivel(intAux);
+	*/
 	aux->imprime();
 	b->imprime();
 	pesarEsquerda(aux);
@@ -241,6 +246,19 @@ void avl::rotacaoSimplesDireita(blocoR *br) {
 	b = NULL;
 	delete b;
 
+
+}
+
+void avl::rotacaoDuplaEsquerda(blocoR *br) {
+	blocoR *b = new blocoR;
+	b = br;
+	cout << "ROTACAO SIMPLES DIREITA";
+	rotacaoSimplesDireita(b->getDir());
+	//cout << "\nESQUERDA\n";
+	//rotacaoSimplesEsquerda(b);
+	//cout << "\nDireita\n";
+	b = NULL;
+	delete b;
 
 }
 
