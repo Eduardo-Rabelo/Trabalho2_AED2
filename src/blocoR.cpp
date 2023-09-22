@@ -3,6 +3,8 @@
 using namespace std;
 
 blocoR::blocoR() {
+	Palavra *p = new Palavra("#");
+	this->r = *p;
 	this->dir = NULL;
 	this->esq = NULL;
 	this->pai = NULL;
@@ -133,4 +135,8 @@ void blocoR::imprime() {
 
 void blocoR::calculaPesoTotal() {
 	this->pesoTotal = this->pesoDir - this->pesoEsq;
+}
+
+void blocoR::setFrequencia(int f) {
+	this->r.setFrequencia(f);
 }

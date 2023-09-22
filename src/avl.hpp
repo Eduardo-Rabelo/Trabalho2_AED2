@@ -7,6 +7,7 @@ class avl {
 private:
 	blocoR *raiz;
 	blocoR *morto;
+	//blocoR *sentinela = new blocoR;
 	//blocoR *dir, *esq;
 	void centralRecursivo(blocoR *br);
 	void preOrdemRecursivo(blocoR *br);
@@ -42,6 +43,14 @@ public:
 	void rotacaoDuplaDireita(blocoR *br);
 	void rotacaoDuplaEsquerda(blocoR *br);
 	void rotacoes(blocoR *br);
+
+	void rotacaoSimplesDireitaRaiz(blocoR *br);
+	void rotacaoSimplesEsquerdaRaiz(blocoR *br);
+	void rotacaoDuplaDireitaRaiz(blocoR *br);
+	void rotacaoDuplaEsquerdaRaiz(blocoR *br);
+	void rotacoesRaiz(blocoR *br);
+
+
 
 };
 #endif

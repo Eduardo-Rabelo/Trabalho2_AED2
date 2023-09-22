@@ -5,6 +5,7 @@
 #include "avl.hpp"
 #include "hash.hpp"
 #include "bloco.hpp"
+#include "huffman.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -99,29 +100,35 @@ int main() {
 
     r.imprime();
     blocoR br(r);
+    r2.setFrequencia(90);
     blocoR br2(r2), br3(r3), br4(r4), br5(r5);
     cout << "Antes de inserir:\n\n";
-
+    cout << "\nbr2(r2):";
+    br2.getRecord().imprime();
+    br2.setFrequencia(789);
+    br2.getRecord().imprime();
+    cout << "\n\n\n\n";
     t.meuInserir(br);
     t.meuInserir(br2);
     t.meuInserir(br3);
     t.meuInserir(br4);
     t.meuInserir(br5);
-
-    cout << "\n\nCentral: \n\n";
-    t.central();
-    cout << "\n\nPreOrdem: \n\n";
-    t.preOrdem();
-    cout << "\n\nPosOrdem: \n\n";
-    t.posOrdem();
+    /*
+        cout << "\n\nCentral: \n\n";
+        t.central();
+        cout << "\n\nPreOrdem: \n\n";
+        t.preOrdem();
+        cout << "\n\nPosOrdem: \n\n";
+        t.posOrdem();*/
     cout << "\n\n\ntchau\n\n\n";
 
-    /**/
+
     tabelaHash hp;
     for (int i = 1; i <= numberOfFiles; i++) {
         tabelaHash hpt;
         Tree tre;
         avl avlT;
+        huffman h;
         string fileName, a, str;
         stringstream ss;
         ss << i;
@@ -186,21 +193,33 @@ int main() {
         std::cout << "\n\n\n";
         for (int i = 0;i < (int)palavras.size();i++) {
             //tre.meuInserir(palavras[i]);////////////////////////DESCOMENTAR
-            avlT.meuInserir(palavras[i]);
+            //avlT.meuInserir(palavras[i]);
+            h.insere(palavras[i]);
         }
+        cout << "\nArvore Binaria Simples:";
         cout << "\n\n\nCENTRAL:\n";
         tre.central();
-        cout << "\n\n\nCENTRAL AVL:\n";
-        avlT.central();
-        cout << "\n\nPosORDEM:\n";
-        tre.posOrdem();
-        cout << "\n\nAVL PosORDEM:\n";
-        avlT.posOrdem();
         cout << "\n\nPreORDEM:\n";
         tre.preOrdem();
+        cout << "\n\nPosORDEM:\n";
+        tre.posOrdem();
+
+        cout << "\nAVL:";
+        cout << "\n\n\nCENTRAL AVL:\n";
+        avlT.central();
+        cout << "\n\nAVL PosORDEM:\n";
+        avlT.posOrdem();
         cout << "\n\nAVL PreORDEM:\n";
         avlT.preOrdem();
+
+        cout << "\nHUFFMAN:";
+        cout << "\n\n\nCENTRAL HUFFMAN:\n";
+        h.central();
+        cout << "\n\nHUFFMAN PosORDEM:\n";
+        h.posOrdem();
+        cout << "\n\nHUFFMAN PreORDEM:\n";
+        h.preOrdem();
     }
-    /**/
+
     return 0;
 }

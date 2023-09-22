@@ -33,42 +33,43 @@ void avl::meuInserir(blocoR r) {
 		this->raiz->setDir(this->morto);
 		this->raiz->setEsq(this->morto);
 		this->raiz->setPai(this->morto);
+		//this->sentinela->setDir(this->raiz);
 		//this->raiz->setNivel(0);
 		this->raiz->getRecord().imprime();
-		cout << "\nINSERI RAIZ\n";
+		std::cout << "\nINSERI RAIZ\n";
 		//this->raiz->verFilhos();
-		//cout << "\nEntrei no if\n";
+		//std::cout << "\nEntrei no if\n";
 	}
 
 	else {
 		br = raiz;
 		while (end == false) {
 			if (aux->getRecord().getNome() == br->getRecord().getNome()) {
-				cout << "\n\nERRO IGUAL\n\n";
+				std::cout << "\n\nERRO IGUAL\n\n";
 				end = true;
 			} else if (aux->getRecord().getFrequencia() > br->getRecord().getFrequencia()) {
-				cout << "\nDIREITA\n";
+				std::cout << "\nDIREITA\n";
 				if (br->getDir() == NULL) {
 					//aux->setNivel(br->getNivel() + 1);
 					br->setDir(aux);
 					br->getDir()->setPai(br);
-					cout << "\nINSERI\n";
+					std::cout << "\nINSERI\n";
 					aux->imprime();
-					cout << "\n\n";
+					std::cout << "\n\n";
 					rebalanceia(br, true, true);
 					end = true;
 				} else {
 					br = br->getDir();
 				}
 			} else if (aux->getRecord().getFrequencia() <= br->getRecord().getFrequencia()) {
-				cout << "\nESQUERDA\n";
+				std::cout << "\nESQUERDA\n";
 				if (br->getEsq() == NULL) {
 					//aux->setNivel(br->getNivel() + 1);
 					br->setEsq(aux);
 					br->getEsq()->setPai(br);
-					cout << "\nINSERI\n";
+					std::cout << "\nINSERI\n";
 					aux->imprime();
-					cout << "\n\n";
+					std::cout << "\n\n";
 					rebalanceia(br, false, true);
 					end = true;
 				} else {
@@ -78,11 +79,11 @@ void avl::meuInserir(blocoR r) {
 		}
 	}
 
-	/*cout << "PAI:";
+	/*std::cout << "PAI:";
 	if (aux->getPai() != this->morto) {
 		aux->getPai()->getRecord().imprime();
 	}
-	cout << "\nFIMPAI\n\n\n\n\n";*/
+	std::cout << "\nFIMPAI\n\n\n\n\n";*/
 
 	aux = NULL;
 	delete aux;
@@ -100,20 +101,22 @@ void avl::rebalanceia(blocoR *br, bool dir, bool insertion) {
 			b->addPesoEsq();
 		}
 	}
-
-	while (b->getPai() != NULL) {
-
-		rotacoes(b);
-
-		if (filhoDireito(b)) {
+	/////////////////////////////////////////////////////
+	while (b != NULL) {
+		if (b->getPai() != NULL) {
+			rotacoes(b);
 			b = b->getPai();
-			pesarDireita(b);
-		} else if (filhoEsquerdo(b)) {
-			b = b->getPai();
-			pesarEsquerda(b);
-		} else {
-			cout << "\n\n\nERRO FILHO\n\n\n";
+			if (b != NULL) {
+				pesarDireita(b);
+				pesarEsquerda(b);
+			}
+
+		} else {	/////////////PROBLEMA DA RAIZ ESTÀ AQUI
+			//rotacoesRaiz(b);
+			b = NULL;
 		}
+
+		///////////////////////////////////////////////////////////
 	}
 	b = NULL;
 	delete b;
@@ -126,10 +129,10 @@ void avl::rotacoes(blocoR *br) {
 	if (b->getPesoTotal() >= 2) {
 
 		if (b->getDir()->getPesoTotal() >= 0) {
-			cout << "\nROTACAO SIMPLES ESQUERDA\n";
+			std::cout << "\nROTACAO SIMPLES ESQUERDA\n";
 			rotacaoSimplesEsquerda(b);
 		} else if (b->getDir()->getPesoTotal() < 0) {
-			cout << "\nROTACAO DUPLA ESQUERDA\n";
+			std::cout << "\nROTACAO DUPLA ESQUERDA\n";
 			rotacaoDuplaEsquerda(b);
 		}
 
@@ -137,10 +140,10 @@ void avl::rotacoes(blocoR *br) {
 
 	else if (b->getPesoTotal() <= -2) {
 		if (b->getEsq()->getPesoTotal() < 0) {
-			cout << "\nROTACAO SIMPLES DIREITA\n";
+			std::cout << "\nROTACAO SIMPLES DIREITA\n";
 			rotacaoSimplesDireita(b);
 		} else if (b->getEsq()->getPesoTotal() >= 0) {
-			cout << "\nROTACAO DUPLA DIREITA\n";
+			std::cout << "\nROTACAO DUPLA DIREITA\n";
 			rotacaoDuplaDireita(b);
 		}
 	}
@@ -161,15 +164,20 @@ void avl::rotacaoSimplesEsquerda(blocoR *br) {
 	}
 
 	b->setEsq(aux);
-	if (filhoDireito(aux)) {
-		if (aux->getPai() != NULL) {
-			aux->getPai()->setDir(b);
+
+	if (aux->getPai() != NULL) {
+
+		if (filhoDireito(aux)) {
+			if (aux->getPai() != NULL) {
+				aux->getPai()->setDir(b);
+			}
+		} else {
+			if (aux->getPai() != NULL) {
+				aux->getPai()->setEsq(b);
+			}
+			std::cout << "ELSE FILHO 2";
 		}
-	} else {
-		if (aux->getPai() != NULL) {
-			aux->getPai()->setEsq(b);
-		}
-		cout << "ELSE FILHO 2";
+
 	}
 	aux->setPai(b);
 	/*
@@ -182,17 +190,23 @@ void avl::rotacaoSimplesEsquerda(blocoR *br) {
 
 	aux->imprime();
 	b->imprime();
-	if (filhoDireito(b)) {
-		rebalanceia(b, true, false);
-	} else if (filhoEsquerdo(b)) {
-		rebalanceia(b, false, false);
+	if (b->getPai() != NULL) {
+		if (filhoDireito(b)) {
+			rebalanceia(b, true, false);
+		} else if (filhoEsquerdo(b)) {
+			rebalanceia(b, false, false);
+		}
 	}
-	cout << "\n\n\n";
+	/*else {
+		rebalanceia(b, false, false);
+	}*/
+
+	std::cout << "\n\n\n";
 	aux = NULL;
 	delete aux;
 	b = NULL;
 	delete b;
-
+	std::cout << "\nPAI TESTE\n";
 }
 
 
@@ -211,20 +225,22 @@ void avl::rotacaoSimplesDireita(blocoR *br) {
 	}
 
 	b->setDir(aux);
+	if (aux->getPai() != NULL) {
 
-	if (filhoEsquerdo(aux)) {
-		if (aux->getPai() != NULL) {
-			aux->getPai()->setEsq(b);
+		if (filhoEsquerdo(aux)) {
+			if (aux->getPai() != NULL) {
+				aux->getPai()->setEsq(b);
+			}
+		} else {
+			if (aux->getPai() != NULL) {
+				aux->getPai()->setDir(b);
+			}
+			std::cout << "ELSE FILHO 2";
 		}
-	} else {
-		if (aux->getPai() != NULL) {
-			aux->getPai()->setDir(b);
-		}
-		cout << "ELSE FILHO 2";
 	}
 
 	aux->setPai(b);
-	cout << "\nATE AQUI FOI\n";
+	std::cout << "\nATE AQUI FOI\n";
 	/*
 	int intAux = b->getNivel();
 	b->setNivel(aux->getNivel());
@@ -237,12 +253,16 @@ void avl::rotacaoSimplesDireita(blocoR *br) {
 
 	aux->imprime();
 	b->imprime();
-	if (filhoDireito(b)) {
-		rebalanceia(b, true, false);
-	} else if (filhoEsquerdo(b)) {
+	if (b->getPai() != NULL) {
+		if (filhoDireito(b)) {
+			rebalanceia(b, true, false);
+		} else if (filhoEsquerdo(b)) {
+			rebalanceia(b, false, false);
+		}
+	} /*else {
 		rebalanceia(b, false, false);
-	}
-	cout << "\n\n\n";
+	}*/
+	std::cout << "\n\n\n";
 
 	aux = NULL;
 	delete aux;
@@ -255,7 +275,7 @@ void avl::rotacaoSimplesDireita(blocoR *br) {
 void avl::rotacaoDuplaEsquerda(blocoR *br) {
 	blocoR *b = new blocoR;
 	b = br;
-	cout << "ROTACAO SIMPLES DIREITA";
+	std::cout << "ROTACAO SIMPLES DIREITA";
 	rotacaoSimplesDireita(b->getDir());
 	b = NULL;
 	delete b;
@@ -265,7 +285,7 @@ void avl::rotacaoDuplaEsquerda(blocoR *br) {
 void avl::rotacaoDuplaDireita(blocoR *br) {
 	blocoR *b = new blocoR;
 	b = br;
-	cout << "ROTACAO SIMPLES Esquerda";
+	std::cout << "ROTACAO SIMPLES Esquerda";
 	rotacaoSimplesEsquerda(b->getEsq());
 	b = NULL;
 	delete b;
@@ -284,7 +304,7 @@ void avl::pesarDireita(blocoR *br) {
 	} else if (b->getDir()->getPesoDir() <= b->getDir()->getPesoEsq()) {
 		b->setPesoDir(b->getDir()->getPesoEsq() + 1);
 	} else {
-		cout << "ERRO DE PESO ";
+		std::cout << "ERRO DE PESO ";
 	}
 	b = NULL;
 	delete b;
@@ -301,7 +321,7 @@ void avl::pesarEsquerda(blocoR *br) {
 	} else if (b->getEsq()->getPesoDir() <= b->getEsq()->getPesoEsq()) {
 		b->setPesoEsq(b->getEsq()->getPesoEsq() + 1);
 	} else {
-		cout << "ERRO DE PESO ";
+		std::cout << "ERRO DE PESO ";
 	}
 	b = NULL;
 	delete b;
@@ -326,7 +346,7 @@ void avl::pesquisa(string str) {
 	blocoR *r = new blocoR(*re);
 
 	if (this->raiz == NULL) {
-		cout << "\n\nÁrvore Vazia\n\n";
+		std::cout << "\n\nÁrvore Vazia\n\n";
 	} else {
 		pesquisaRecursiva(*r);
 	}
@@ -335,7 +355,7 @@ void avl::pesquisaRecursiva(blocoR r) {
 	blocoR *br = new blocoR(r), *aux = new blocoR(r);
 	aux = &r;
 	if (this->raiz == NULL) {
-		cout << "\n\nÁrvore Vazia\n\n";
+		std::cout << "\n\nÁrvore Vazia\n\n";
 	} else {
 		br = raiz;
 		if (!comparacaoAlfabetica(aux->getRecord().getNome(), br->getRecord().getNome())) {
@@ -349,10 +369,10 @@ void avl::pesquisaRecursiva(blocoR r) {
 void avl::central() {
 	if (this->raiz != NULL) {
 		if (raiz != NULL) {
-			//cout << "\n\nRecursão:";
+			//std::cout << "\n\nRecursão:";
 			centralRecursivo(this->raiz);
 		} else {
-			cout << "Arvore vazia";
+			std::cout << "Arvore vazia";
 		}
 
 	}
@@ -374,7 +394,7 @@ void avl::preOrdem() {
 		if (raiz != NULL) {
 			preOrdemRecursivo(this->raiz);
 		} else {
-			cout << "Arvore vazia";
+			std::cout << "Arvore vazia";
 		}
 
 	}
@@ -396,7 +416,7 @@ void avl::posOrdem() {
 		if (raiz != NULL) {
 			posOrdemRecursivo(this->raiz);
 		} else {
-			cout << "Arvore vazia";
+			std::cout << "Arvore vazia";
 		}
 
 	}

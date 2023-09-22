@@ -2,16 +2,17 @@
 #define PALAVRA_HPP
 #include <iostream>
 using namespace std;
-class Palavra{
-    private:
-        int frequencia;
-        string palavra;
-    public:
-        Palavra(string palavra);
-        Palavra();
-        void add();
-        void imprime();
-        int getFrequencia();
-        string getNome();
+class Palavra {
+private:
+    int frequencia;
+    string palavra;
+public:
+    Palavra(string palavra);
+    Palavra();
+    void add();
+    void imprime();
+    int getFrequencia();
+    void setFrequencia(int f);
+    string getNome();
 };
 #endif

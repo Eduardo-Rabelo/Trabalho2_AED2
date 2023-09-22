@@ -44,6 +44,7 @@ public:
     void verFilhos();
 
     void imprime();
+    void setFrequencia(int f);
     //~bloco();
 
 };
