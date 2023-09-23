@@ -43,7 +43,7 @@
 <p align="justify">
 	A seguir, é demonstrado como os dados do heap do "input2.txt" ficam na árvore binária simples. É possível notar que ela está desbalanciada, pois não há mecanismos de rebalanceamento pra essa árvore.
 </p>
-![LarguraG2](https://github.com/Eduardo-Rabelo/Trabalho2_AED2/blob/main/imagens/avl.jpeg)
+![binaria](https://github.com/Eduardo-Rabelo/Trabalho2_AED2/blob/main/imagens/binariaSimples.jpeg)
 
 <p align="justify">
 	A imagem a seguir mostra a árvore AVL para os mesmos dados. É visível a efetividade do balanceamento na questão de pesquisa, pois, como a árvore balanceada tem uma altura de log(n), o custo da pesquisa é da ordem de teta de log(n). Como a raiz não pode ser movida e ela é o item de menor frequencia, a árvore sempre vai pender pra direita, porém como a raiz é apenas um nó, ela não altera a ordem do custo computacional.
@@ -54,7 +54,7 @@
 <p align="justify">
 	Por fim, a imagem a seguir mostra a árvore de Huffman para os mesmos dados. A grande vantagem do algoritmo de Huffman é o acesso rápido às palavras mais relevantes. O custo da árvore continua sendo da ordem de teta de log(n), porém, para as pesquisas provavelmente mais comuns, essa árvore é extremamente eficiente.
 </p>
-![LarguraG](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img3.png)
+![huffman](https://github.com/Eduardo-Rabelo/Trabalho2_AED2/blob/main/imagens/huffman.jpeg)
 
 # Custo
 <p align="justify">
