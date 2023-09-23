@@ -39,10 +39,10 @@ void Tree::meuInserir(blocoR r) {
 		br = raiz;
 		while (end == false) {
 			if (aux->getRecord().getNome() == br->getRecord().getNome()) {
-				cout << "\n\nERRO IGUAL\n\n";
+				//cout << "\n\nERRO IGUAL\n\n";
 				end = true;
 			} else if (aux->getRecord().getFrequencia() > br->getRecord().getFrequencia()) {
-				cout << "\nDIREITA\n";
+				//cout << "\nDIREITA\n";
 				if (br->getDir() == NULL) {
 					br->setDir(aux);
 					br->getDir()->setPai(br);
@@ -51,7 +51,7 @@ void Tree::meuInserir(blocoR r) {
 					br = br->getDir();
 				}
 			} else if (aux->getRecord().getFrequencia() <= br->getRecord().getFrequencia()) {
-				cout << "\nESQUERDA\n";
+				//cout << "\nESQUERDA\n";
 				if (br->getEsq() == NULL) {
 					br->setEsq(aux);
 					br->getEsq()->setPai(br);

@@ -4,12 +4,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 huffman::huffman() {
 
 }
-void huffman::insere(blocoR r) {
+void huffman::insere(blocoR *r) {
 	this->filaPrioridade.push_back(r);
 }
 
@@ -42,127 +43,128 @@ void Huffman_Tree::constroi() {
 
 void huffman::constroi() {
 	bool fim = false;
-	blocoR *x = new blocoR;
-	blocoR *y = new blocoR;
-	blocoR *z = new blocoR;
-	while (fim == false) {
+	// blocoR *x = new blocoR;
+	// blocoR *y = new blocoR;
+	// blocoR *z = new blocoR;
+	// while (fim == false) {
+	while (filaPrioridade.size() > 1) {
 
-		*x = this->filaPrioridade[0];
-		*y = this->filaPrioridade[1];
-		cout << "\n\nimprime Z:";
+		blocoR *x = this->filaPrioridade[0];
+		blocoR *y = this->filaPrioridade[1];
+		blocoR *z = new blocoR;
+
+		// cout << "\n\nimprime Z:";
 		/*teste.getRecord().imprime();
 		teste.setFrequencia(x->getRecord().getFrequencia() + y->getRecord().getFrequencia());
 		teste.getRecord().imprime();*/
 
+		// cout << "\nfreq x: " << x->getRecord().getFrequencia() << endl;
+		// cout << "freq y: " << y->getRecord().getFrequencia() << endl << endl;
+
 		z->setFrequencia(x->getRecord().getFrequencia() + y->getRecord().getFrequencia());
 		z->setEsq(x);
 		z->setDir(y);
-		if (y->getPesoDir() > y->getPesoEsq()) {
-			z->setPesoDir(y->getPesoDir() + 1);
-		} else {
-			z->setPesoDir(y->getPesoEsq() + 1);
-		}
-		if (x->getPesoEsq() > x->getPesoDir()) {
-			z->setPesoEsq(x->getPesoEsq() + 1);
-		} else {
-			z->setPesoEsq(x->getPesoDir() + 1);
-		}
-		x->setPai(z);
-		y->setPai(z);
+		// if (y->getPesoDir() > y->getPesoEsq()) {
+		// 	z->setPesoDir(y->getPesoDir() + 1);
+		// } else {
+		// 	z->setPesoDir(y->getPesoEsq() + 1);
+		// }
+		// if (x->getPesoEsq() > x->getPesoDir()) {
+		// 	z->setPesoEsq(x->getPesoEsq() + 1);
+		// } else {
+		// 	z->setPesoEsq(x->getPesoDir() + 1);
+		// }
+		// x->setPai(z);
+		// y->setPai(z);
 
-		z->imprime();
+		// z->imprime();
 
 		this->filaPrioridade.erase(this->filaPrioridade.begin());
 		this->filaPrioridade.erase(this->filaPrioridade.begin());
 
-		cout << "\n\nIMPRIME X:";
-		x->imprime();
-		cout << "\n\nIMPRIME Y:";
-		y->imprime();
-		opera();
-		cout << "\n\nDepois do Opera:";
-		for (int i = 0;i < (int)this->filaPrioridade.size();i++) {
-			this->filaPrioridade[i].imprime();
-		}
-		this->insere(*z);
-		cout << "\n\nDepois do Insere:";
-		for (int i = 0;i < (int)this->filaPrioridade.size();i++) {
-			this->filaPrioridade[i].imprime();
-		}
-		cout << "\n\n\n";
-		if ((int)this->filaPrioridade.size() == 1) {
-			fim = true;
-			cout << "\nENTREI no IF\n";
-		}
+		this->filaPrioridade.push_back(z);
+		sort(this->filaPrioridade.begin(), this->filaPrioridade.end(), blocoR::compara);
+
+		// cout << "\n\nIMPRIME X:";
+		// x->imprime();
+		// cout << "\n\nIMPRIME Y:";
+		// y->imprime();
+		// opera();
+		// cout << "\n\nDepois do Opera:";
+		// for (int i = 0;i < (int)this->filaPrioridade.size();i++) {
+		// 	this->filaPrioridade[i]->imprime();
+		// }
+		// this->insere(*z);
+		// cout << "\n\nDepois do Insere:";
+		// for (int i = 0;i < (int)this->filaPrioridade.size();i++) {
+		// 	this->filaPrioridade[i]->imprime();
+		// }
+		// cout << "\n\n\n";
+		// if ((int)this->filaPrioridade.size() == 1) {
+		// 	fim = true;
+		// 	cout << "\nENTREI no IF\n";
+		// }
 	}
-	cout << "\n\n\nACABOU";
-	//*this->raiz = filaPrioridade[0];
-	cout << "\n\n\nACABOU";
-	x = NULL;
-	y = NULL;
-	z = NULL;
-	delete x;
-	delete y;
-	delete z;
+	// cout << "\n\n\nACABOU";
+	this->raiz = filaPrioridade[0];
+	// cout << "\n\n\nACABOU";
+	// x = NULL;
+	// y = NULL;
+	// z = NULL;
+	// delete x;
+	// delete y;
+	// delete z;
 }
 
 
 void huffman::opera() {
 
-	blocoR aux;
+	blocoR *aux;
 	for (int i = ((int)this->filaPrioridade.size() / 2 - 1); i > 0; i--) {
-		if (filaPrioridade[i].getRecord().getFrequencia() > filaPrioridade[2 * i].getRecord().getFrequencia()) {
+		if (filaPrioridade[i]->getRecord().getFrequencia() > filaPrioridade[2 * i]->getRecord().getFrequencia()) {
 			aux = filaPrioridade[i];
 			filaPrioridade[i] = filaPrioridade[2 * i];
 			filaPrioridade[2 * i] = aux;
 		}
-		if (filaPrioridade[i].getRecord().getFrequencia() > filaPrioridade[(2 * i) + 1].getRecord().getFrequencia()) {
+		if (filaPrioridade[i]->getRecord().getFrequencia() > filaPrioridade[(2 * i) + 1]->getRecord().getFrequencia()) {
 			aux = filaPrioridade[i];
 			filaPrioridade[i] = filaPrioridade[(2 * i) + 1];
 			filaPrioridade[(2 * i) + 1] = aux;
 		}
 	}
-	if (filaPrioridade[0].getRecord().getFrequencia() > filaPrioridade[1].getRecord().getFrequencia()) {
+	if (filaPrioridade[0]->getRecord().getFrequencia() > filaPrioridade[1]->getRecord().getFrequencia()) {
 		aux = filaPrioridade[0];
 		filaPrioridade[0] = filaPrioridade[1];
 		filaPrioridade[1] = aux;
 	}
-	if (filaPrioridade[0].getRecord().getFrequencia() > filaPrioridade[2].getRecord().getFrequencia()) {
+	if (filaPrioridade[0]->getRecord().getFrequencia() > filaPrioridade[2]->getRecord().getFrequencia()) {
 		aux = filaPrioridade[0];
 		filaPrioridade[0] = filaPrioridade[2];
 		filaPrioridade[2] = aux;
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 void huffman::central() {
+	this->raiz = nullptr;
 	constroi();
-	if (this->raiz != NULL) {
-		if (raiz != NULL) {
-			//cout << "\n\nRecursão:";
-			centralRecursivo(this->raiz);
-		} else {
-			cout << "Arvore vazia";
-		}
+	// if (this->raiz != NULL) {
+	// 	if (raiz != NULL) {
+	// 		//cout << "\n\nRecursão:";
+	cout << endl;
+	centralRecursivo(this->raiz);
+	cout << endl;
+	// 	} else {
+	// 		cout << "Arvore vazia";
+	// 	}
 
-	}
+	// }
 
 }
 
 void huffman::centralRecursivo(blocoR *br) {
-	if (br != NULL) {
+	// cout << "loop" << endl;
+
+	if (br != nullptr) {
 		centralRecursivo(br->getEsq());
 		br->getRecord().imprime();
 		centralRecursivo(br->getDir());

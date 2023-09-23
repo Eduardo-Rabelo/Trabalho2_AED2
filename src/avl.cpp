@@ -35,8 +35,8 @@ void avl::meuInserir(blocoR r) {
 		this->raiz->setPai(this->morto);
 		//this->sentinela->setDir(this->raiz);
 		//this->raiz->setNivel(0);
-		this->raiz->getRecord().imprime();
-		std::cout << "\nINSERI RAIZ\n";
+		//this->raiz->getRecord().imprime();
+		//std::cout << "\nINSERI RAIZ\n";
 		//this->raiz->verFilhos();
 		//std::cout << "\nEntrei no if\n";
 	}
@@ -45,30 +45,30 @@ void avl::meuInserir(blocoR r) {
 		br = raiz;
 		while (end == false) {
 			if (aux->getRecord().getNome() == br->getRecord().getNome()) {
-				std::cout << "\n\nERRO IGUAL\n\n";
+				//	std::cout << "\n\nERRO IGUAL\n\n";
 				end = true;
 			} else if (aux->getRecord().getFrequencia() > br->getRecord().getFrequencia()) {
-				std::cout << "\nDIREITA\n";
+				//std::cout << "\nDIREITA\n";
 				if (br->getDir() == NULL) {
 					//aux->setNivel(br->getNivel() + 1);
 					br->setDir(aux);
 					br->getDir()->setPai(br);
-					std::cout << "\nINSERI\n";
-					aux->imprime();
-					std::cout << "\n\n";
+					//std::cout << "\nINSERI\n";
+					//aux->imprime();
+					//std::cout << "\n\n";
 					rebalanceia(br, true, true);
 					end = true;
 				} else {
 					br = br->getDir();
 				}
 			} else if (aux->getRecord().getFrequencia() <= br->getRecord().getFrequencia()) {
-				std::cout << "\nESQUERDA\n";
+				//std::cout << "\nESQUERDA\n";
 				if (br->getEsq() == NULL) {
 					//aux->setNivel(br->getNivel() + 1);
 					br->setEsq(aux);
 					br->getEsq()->setPai(br);
-					std::cout << "\nINSERI\n";
-					aux->imprime();
+					//std::cout << "\nINSERI\n";
+					//aux->imprime();
 					std::cout << "\n\n";
 					rebalanceia(br, false, true);
 					end = true;
@@ -129,10 +129,10 @@ void avl::rotacoes(blocoR *br) {
 	if (b->getPesoTotal() >= 2) {
 
 		if (b->getDir()->getPesoTotal() >= 0) {
-			std::cout << "\nROTACAO SIMPLES ESQUERDA\n";
+			//std::cout << "\nROTACAO SIMPLES ESQUERDA\n";
 			rotacaoSimplesEsquerda(b);
 		} else if (b->getDir()->getPesoTotal() < 0) {
-			std::cout << "\nROTACAO DUPLA ESQUERDA\n";
+			//std::cout << "\nROTACAO DUPLA ESQUERDA\n";
 			rotacaoDuplaEsquerda(b);
 		}
 
@@ -140,10 +140,10 @@ void avl::rotacoes(blocoR *br) {
 
 	else if (b->getPesoTotal() <= -2) {
 		if (b->getEsq()->getPesoTotal() < 0) {
-			std::cout << "\nROTACAO SIMPLES DIREITA\n";
+			//std::cout << "\nROTACAO SIMPLES DIREITA\n";
 			rotacaoSimplesDireita(b);
 		} else if (b->getEsq()->getPesoTotal() >= 0) {
-			std::cout << "\nROTACAO DUPLA DIREITA\n";
+			//std::cout << "\nROTACAO DUPLA DIREITA\n";
 			rotacaoDuplaDireita(b);
 		}
 	}
@@ -188,8 +188,8 @@ void avl::rotacaoSimplesEsquerda(blocoR *br) {
 	pesarDireita(aux);
 	pesarEsquerda(b);
 
-	aux->imprime();
-	b->imprime();
+	//aux->imprime();
+	//b->imprime();
 	if (b->getPai() != NULL) {
 		if (filhoDireito(b)) {
 			rebalanceia(b, true, false);
@@ -201,12 +201,10 @@ void avl::rotacaoSimplesEsquerda(blocoR *br) {
 		rebalanceia(b, false, false);
 	}*/
 
-	std::cout << "\n\n\n";
 	aux = NULL;
 	delete aux;
 	b = NULL;
 	delete b;
-	std::cout << "\nPAI TESTE\n";
 }
 
 
@@ -235,24 +233,22 @@ void avl::rotacaoSimplesDireita(blocoR *br) {
 			if (aux->getPai() != NULL) {
 				aux->getPai()->setDir(b);
 			}
-			std::cout << "ELSE FILHO 2";
 		}
 	}
 
 	aux->setPai(b);
-	std::cout << "\nATE AQUI FOI\n";
 	/*
 	int intAux = b->getNivel();
 	b->setNivel(aux->getNivel());
 	aux->setNivel(intAux);
-	*/
-	aux->imprime();
-	b->imprime();
+	/*/
+	//aux->imprime();
+	//b->imprime();
 	pesarEsquerda(aux);
 	pesarDireita(b);
 
-	aux->imprime();
-	b->imprime();
+	//aux->imprime();
+	//b->imprime();
 	if (b->getPai() != NULL) {
 		if (filhoDireito(b)) {
 			rebalanceia(b, true, false);
@@ -262,7 +258,7 @@ void avl::rotacaoSimplesDireita(blocoR *br) {
 	} /*else {
 		rebalanceia(b, false, false);
 	}*/
-	std::cout << "\n\n\n";
+
 
 	aux = NULL;
 	delete aux;
@@ -275,7 +271,7 @@ void avl::rotacaoSimplesDireita(blocoR *br) {
 void avl::rotacaoDuplaEsquerda(blocoR *br) {
 	blocoR *b = new blocoR;
 	b = br;
-	std::cout << "ROTACAO SIMPLES DIREITA";
+	//std::cout << "ROTACAO SIMPLES DIREITA";
 	rotacaoSimplesDireita(b->getDir());
 	b = NULL;
 	delete b;
@@ -285,7 +281,7 @@ void avl::rotacaoDuplaEsquerda(blocoR *br) {
 void avl::rotacaoDuplaDireita(blocoR *br) {
 	blocoR *b = new blocoR;
 	b = br;
-	std::cout << "ROTACAO SIMPLES Esquerda";
+	//std::cout << "ROTACAO SIMPLES Esquerda";
 	rotacaoSimplesEsquerda(b->getEsq());
 	b = NULL;
 	delete b;

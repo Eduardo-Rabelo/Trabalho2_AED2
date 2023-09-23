@@ -1,68 +1,85 @@
-# Trabalho de Aquecimento: Top k elementos
+# Trabalho 1: Árvores
 # introdução
 <p align="justify">
-		O algoritmo aqui apresentado tem como objetivo guardar todas as palavras de arquivos de entrada "inputX.txt", sendo X o número do input, em uma tabela hash e depois fazer o uso de um heap mínimo para descobrir as k palavras que mais aparecem nos textos dos inputs.
-</p>
-<p align="justify">
-	 O heap deve ser usado de modo que ele primeiro é carregado com um vetor que armazena k palavras e faz uma operação de heap no vetor pra fazer com que o valor mínimo fique na posição 0. A cada inserção no heap, após ele ser carregado a primeira vez, a operação pra achar o valor mínimo é realizada novamete. Essa operação é feita com base na frequencia em que as palavras aparecem no texto.
-</p>
-<p align="justify">
-	Na classe tabelaHash, há um método que faz com que cada palavra da hash seja comparada com o mínimo do heap por meio da função do heap "addPalavra(Palavra p)", que coloca a palavra p na posição zero do heap caso ela seja maior que o mínimo e faz a operação de heap novamente. Dessa forma, após toda tabela ser percorrida, apenas as palavras com as maiores frequências permanescerão no heap, de modo que elas serão as k palavras mais frequentes do texto.
-</p>
-
-<p align="justify">
-	Para se carregar a tabela hash com as palavras dos inputs e mostrar as palavras mais frequentes de cada input, é utilizado um for que leva em conta a constante inteira "numberOfFiles" pra ler todos os inputs, aramazenar suas palavras na hash e mostrar as k palavras mais frequentes. O k, que é o tamanho do heap, no código é a variável global definida no arquivo "hash.hpp" como "tamHeap".
-</p>
-
-# Modo como palavras são armazenadas na hash
-<p align="justify">
-	As palavras são armazenadas na hash em lowercase e com os acentos, porem certas palavras, precedias, ou sucedidas por caracteres especiais, permanecem com esses caracteres ao serem armazenados na hash. Alguns desses casos são os caracteres "”" e "—", que são representados nas palavras da hash como "⠝" e "⠴". Como essas palavras são contadas como distintas das mesmas palavras sem os caracteres especiais, pode haver uma subcontagem das "<i>top words". Na figura a seguir esse fato é mostrado com um exemplo feito com um arquivo de teste, que continha a palavra " ministros” "
+		O algoritmo aqui apresentado tem como objetivo aproveitar o trabalho anterior para construir árvores binária simples, AVL e de Huffman para guardar as top k palavras de cada texto. Deveria haver um arquivo input.data, no qual o usuário colocaria as palavras que gostaria de pesquisar sobre, para que fossem construídas as três árvores pra cada texto em que a palavra aparece, por palavra pesquisada. Infelizmente, em razão de problemas de tempo, só foi possível criar as três estruturas pra cada texto, não levando em conta as palavras do usuário.
 </p>
 
 
-![ProfundoPe](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img1.png)
+# Árvore Binária Simples
+<p align="justify">
+	A árvore binária simples é funcional, embora conte apenas com os métodos de inserção e remoção. Seus nós pertencem à classe blocoR, que conta com atributos e métodos que jamais serão usados pela árvore binária simples, porém serão usados nas demais árvores, de modo a garantir o pleno funcionamento delas, no quesito de balanceamento, por exemplo.
+</p>
+
+# Árvore AVL
 
 <p align="justify">
-	Na hash, os índices das posições em que as palavras serão armazenadas são calculados com base em soma mod tamanho da tabela, que é a variável global definida no arquivo "hash.hpp" como "tam". Soma seria a soma dos números inteiros que representam os caracteres ASCII da palavra. Caso já haja uma palavra armanzenada no índice, outro índice é calculado da mesma forma, porém a soma é mudada de modo que ela passa a ser a soma dos caracteres multiplicados pelas suas posições na própria palavra. O caractere vda posição 0, por exemplo, sempre terá valor 0. Os caracteres especiais são substituidos por caracteres ASCII para se fazer esse cálculo.
+	A árvore AVL funciona de modo a manter-se balanceada, aceitando, no máximo, um grau de desbalanceamento com módulo maior que 1, ou eja, um nível de desbalanceamento. Nessqa árvore, cada nó tem seu grau de desbalanceamento, que consiste na diferença entre o nível do nó mais baixo da subárvore a direita do nó, e o nível do nó mais baixo da subárvore a esquerda do mesmo. Caso um nó tenha um grau de desbalanceamento  maior que 1, há regras de balanceamento para fazer com que seu grau seja menor que dois.
 </p>
 
 <p align="justify">
-	Caso, mesmo calculando duas vezes o índice, haja colisão, a palavra é armazenada em uma lista na posição da hash indicada pelo segundo índice.
+	Caso um nó tenha grau maior que um, se seu filho direito tiver grau positivo, simplesmente faz-se uma rotação simples pra esquerda. O filho direito passa a ocupar o lugar do pai, que se torna seu filho esquerdo, e a subárvore esquerda do antigo filho direito, se torna a subárvore direita do antigo pai.
 </p>
+
+<p align="justify">
+	De modo semelhante, caso um nó tenha grau menor que -1, se seu filho esquerdo tiver grau negativo, faz-se uma rotação simples para a direita. O filho esquerdo passa a ocupar o lugar do pai, que se torna seu filho direito, e a subárvore direita do antigo filho esquerdo, se torna a subárvore esquerda do antigo pai.
+</p>
+
+<p align="justify">
+	Também há as rotações duplas. Caso os sinais sejam diferentes, do pai e do filho analizado, primeiro faz-se a rotação do filho, depois do pai. No caso de o grau do pai ser positivo, e do filho direito ser negativo, primeiro faz-se uma rotação simples a direita no filho esquerdo, depois uma rotação simples a esquerda no pai. De modo semelhante, acontece no caso de o pai ser negativo e o filho positivo, porém o filho é rotacionado pra esquerda, e o pai a direita.
+</p>
+
+# Observações AVL
+<p align="justify">
+	A raiz da AVL implementada pra esse trabalho não é capaz de rotacionar, funcionando como uma espécie de sentinela. Para versões futuras do trabalho isso deve ser corrigido, porém com o tempo disponível, não foi possível corrigir esse problema.
+</p>
+
+# Huffman
+<p align="justify">
+	O algoritmo de Huffman consiste em separar os dados desejados, e ajunta-los em pares, os de menor relevancia, ou frequência, ficam juntos. Depois disso, esses pares são aglutinados em árvores, que são fundidas as outras árvores até se formar uma árvore com todos os dados, de modo que os de maior relevancia fiquem mais póximos da raiz.
+</p>
+
 
 # Toy Example
-
-![LarguraPe](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img2.png)
+<p align="justify">
+	A seguir, é demonstrado como os dados do heap do "input2.txt" ficam na árvore binária simples. É possível notar que ela está desbalanciada, pois não há mecanismos de rebalanceamento pra essa árvore.
+</p>
+![LarguraPe](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/binariaSiples.png)
 
 <p align="justify">
-	A imagem a seguir mostra qual seria a saída do arquivo de exemplo mostrado na imagem anterior, para k=10. É possível notar que as palavras com caracteres especiais também contam pro calculo do heap.
+	A imagem a seguir mostra a árvore AVL para os mesmos dados. É visível a efetividade do balanceamento na questão de pesquisa, pois, como a árvore balanceada tem uma altura de log(n), o custo da pesquisa é da ordem de teta de log(n). Como a raiz não pode ser movida e ela é o item de menor frequencia, a árvore sempre vai pender pra direita, porém como a raiz é apenas um nó, ela não altera a ordem do custo computacional.
 </p>
 
 ![LarguraG](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img3.png)
 
+<p align="justify">
+	Por fim, a imagem a seguir mostra a árvore de Huffman para os mesmos dados. A grande vantagem do algoritmo de Huffman é o acesso rápido às palavras mais relevantes. O custo da árvore continua sendo da ordem de teta de log(n), porém, para as pesquisas provavelmente mais comuns, essa árvore é extremamente eficiente.
+</p>
+![LarguraG](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img3.png)
+
 # Custo
 <p align="justify">
-	O custo do algoritmo, em questão de memória alocada, é da ordem de Teta de n, sendo n o número de palavras do texto. Em questão de iterações, as palavras, após serem armazenadas na hash, são conferidas uma a uma para ver se entram no heap, o que também tem custo Teta de n. Essas operações se repetem pra cada arquivo, ou seja, o custo total do código em tempo é da classe de Teta de n*m, sendo m o número de arquivos de input.
+	O custo do algoritmo, analisando apenas as árvores, em questão de memória alocada, é da ordem de Teta de n, sendo n o número de palavras das árvores. Em questão de iterações, para pesquisa, os custos da AVL e da árvore de Huffman, como mencionado anteriormente, são da ordem de teta de log(n), porém o custo da binária, no pior dos casos, chega a ser linear. Em questão de montagem porém, a avl é extremamente cara dependendo de quantas vezes é necessãrio fazer rebalanceamentos na árvore.
 </p>
 
 # Conclusão
 <p align="justify">
-	Em suma, o algorítimo consiste em, para cada arquivo de input, criar uma hash com todas as palavras do arquivo e calcular as k "<i>top words" por meio de um heap mínimo baseado na frequencia das palavras no texto. O custo do algorítimo é linear em relação ao total de palavras de todos os arquivos e há um problema de conversão de caracteres especiais que deverá ser corrigido na próxima versão do trabalho.
+	Em suma, o algorítimo consiste em, para cada arquivo de input, criar os três tipos de árvore, com base nas top k palavras do heap. As árvores de Huffman e AVL se mostram mais eficientes que a binária comum, ao menos em termos de pesquisa, embora a AVL seja menos eficiente caso hajam mais operações de remoção e inserção, do que operações de pesquisa, pois rotações são caras.
 </p>
 
 
 
 # Output
 <p align="justify">
-O output desse código é, para cada arquivo, o nome do arquivo analisado segido do número de palavras na hash e o heap do arquivo, como pode-se ver na imagem seguinte.
+Por hora, o output é apenas a impressão das três árvores dos três modos conhecidos, central, pré ordem, e pós ordem.
 </p>
-
-![Output](https://github.com/Eduardo-Rabelo/t1_AED2/blob/main/imagens/img4.png)
 
 # Observações
 <p align="justify">
-Além do problema das palavras com caracteres especiais, a Hash suporta apenas cerca de 25600 palavras. Não foi possível ler as últimas 400 linhas do texto Semana_Machado_Assis por esta razão. O arquivo "input1.txt" não contem essas linhas. Estes pontos devem ser corrigidos em trabalhos futuros.
+O algoritimo não entrega todas as especificações do trabalho, porém as três estruturas principais estão prontas e, com excessão do problema na raiz da AVL, funcionando corretamente. Para futuras versões, o algoritmo será capaz de indicar as árvores para cada palavra que o usuário propuser.
 </p>
+
+# Referências
+CORMEN, Thomas H. et al. Algoritmos: Teoria e Prática. 3. ed. Elsevier, 2009.
 
 # Compilação e Execução
 

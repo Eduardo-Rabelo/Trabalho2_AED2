@@ -12,7 +12,7 @@ using namespace std;
 
 class huffman {
 private:
-	vector<blocoR> filaPrioridade;
+	vector<blocoR *> filaPrioridade;
 	blocoR *raiz;
 
 	void centralRecursivo(blocoR *br);
@@ -22,7 +22,7 @@ private:
 public:
 	huffman();
 
-	void insere(blocoR r);
+	void insere(blocoR *r);
 	void constroi();
 
 	void central();

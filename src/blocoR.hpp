@@ -16,6 +16,9 @@ public:
     blocoR();
     blocoR(Palavra r);
     Palavra getRecord();
+    static bool compara(blocoR *a, blocoR *b) {
+        return a->getRecord().getFrequencia() < b->getRecord().getFrequencia();
+    }
 
     blocoR *getDir();
     void setDir(blocoR *b);
